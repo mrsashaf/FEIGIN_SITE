@@ -1,16 +1,8 @@
-window.FEIGIN_CLEARANCE = {
-  hasLevel2() {
-    return localStorage.getItem('aberration_clearance_level') === '2';
-  },
-  grantLevel2() {
-    localStorage.setItem('aberration_clearance_level', '2');
-  }
-};
-
 document.addEventListener('DOMContentLoaded', () => {
-  function applyLevel2AccessUI() {
-    window.hasLevel2Access = true;
+  const accessState = window.FEIGIN_ACCESS_STATE;
+  if (!accessState) return;
 
+  function applyLevel2AccessUI() {
     document.querySelectorAll('.evidence-card[data-access="level-2"], .case-card--locked').forEach((card) => {
       if (card.classList.contains('evidence-card')) {
         card.dataset.access = 'public';
@@ -33,13 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const case02Btn = document.querySelector('.js-case02-access-btn');
     if (case02Btn) {
-      case02Btn.textContent = 'OPEN COMFORT ZONE ↓';
+      case02Btn.textContent = 'OPEN COMFORT ZONE \u2193';
       case02Btn.setAttribute('href', 'censored.html');
     }
   }
 
-  const hasLevel2 = window.FEIGIN_CLEARANCE.hasLevel2();
-  window.hasLevel2Access = hasLevel2;
+  const hasLevel2 = accessState.hasLevel2();
 
   if (document.body.classList.contains('case-page') && document.body.classList.contains('censored-page')) {
     if (!hasLevel2) {
@@ -52,5 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
     applyLevel2AccessUI();
   }
 
-  window.addEventListener('feigin:clearance-granted', applyLevel2AccessUI);
+  accessState.onChange(applyLevel2AccessUI);
 });
+

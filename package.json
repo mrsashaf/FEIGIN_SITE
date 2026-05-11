@@ -5,7 +5,8 @@
   "description": "FEIGIN ENTERTAINMENT site",
   "main": "index.html",
   "scripts": {
-    "dev": "echo 'Starting...'"
+    "dev": "python -m http.server 5500",
+    "check": "node scripts/check-files.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.38.4",

@@ -67,10 +67,10 @@ export default async function handler(req, res) {
           <p style="font-size: 12px; color: #666; margin-top: 40px;">
             This is an automated system message.<br>
             Do not reply to this email.<br><br>
-            â€” PRISM Oversight Authority
+            — PRISM Oversight Authority
           </p>
         </div>`,
-      text: `PRISM OVERSIGHT AUTHORITY\n\nYour Level 2 access request has been approved.\n\nUse the link below to activate access to the restricted archive:\n\n[Activate Level 2 Access]: ${activateUrl}\n\nThis is an automated system message.\nDo not reply to this email.\n\nâ€” PRISM Oversight Authority`
+      text: `PRISM OVERSIGHT AUTHORITY\n\nYour Level 2 access request has been approved.\n\nUse the link below to activate access to the restricted archive:\n\n[Activate Level 2 Access]: ${activateUrl}\n\nThis is an automated system message.\nDo not reply to this email.\n\n— PRISM Oversight Authority`
     });
 
     if (emailError) {
@@ -85,3 +85,4 @@ export default async function handler(req, res) {
     return res.status(500).json({ success: false, message: 'TRANSMISSION FAILED. TRY AGAIN.' });
   }
 }
+

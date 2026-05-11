@@ -105,10 +105,17 @@
         .redacted-block {
             display: inline-block;
             background-color: #fff;
-            width: 280px;
+            width: min(280px, 42vw);
             height: 0.85em;
             vertical-align: baseline;
             margin-left: 5px;
+        }
+
+        .lore-callout {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 6px;
+            white-space: nowrap;
         }
 
         .lore-source {
@@ -330,7 +337,7 @@
         }
 
         .case-meta-detail {
-            color: #555;
+            color: #999999;
             font-weight: 500;
         }
 
@@ -363,7 +370,7 @@
             display: block;
         }
 
-        .case-meta-nav-btn--prev { color: #555; }
+        .case-meta-nav-btn--prev { color: #999999; }
         .case-meta-nav-btn--next { color: #fff; }
         .case-meta-nav-btn--prev:hover { color: #999; }
         .case-meta-nav-btn--next:hover { color: #ccc; }
@@ -431,7 +438,7 @@
             align-items: center;
             justify-content: center;
             background-color: transparent;
-            color: #555;
+            color: #999999;
             text-decoration: none;
             width: var(--case-button-width);
             height: var(--case-button-height);
@@ -443,7 +450,7 @@
             line-height: 1;
             white-space: nowrap;
             overflow: hidden;
-            border: 2px solid #555;
+            border: 2px solid #999999;
             transition: background-color 0.2s, color 0.2s, border-color 0.2s;
         }
 
@@ -677,7 +684,7 @@
             padding: 0;
             background: transparent;
             border: none;
-            color: #555;
+            color: #999999;
             font-family: 'Inter', sans-serif;
             font-size: clamp(14px, 1vw, 18px);
             font-weight: 800;
@@ -699,7 +706,7 @@
         }
 
         .filter-separator {
-            color: #555;
+            color: #999999;
             font-family: 'Inter', sans-serif;
             font-size: clamp(14px, 1vw, 18px);
             font-weight: 800;
@@ -873,7 +880,7 @@
             font-family: 'Roboto Mono', monospace;
             font-size: 15.3px;
             font-weight: 500;
-            color: #555;
+            color: #999999;
             letter-spacing: 0;
             margin-bottom: 8px;
             text-transform: uppercase;
@@ -1047,36 +1054,44 @@
         }
 
         .access-form {
-            display: flex;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) var(--case-button-width);
             gap: 12px;
-            align-items: center;
-            flex-wrap: nowrap;
+            align-items: stretch;
         }
 
         .access-input {
             flex: 1;
             width: 100%;
             height: var(--case-button-height);
-            background: transparent;
-            border: 4px solid #fff;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid #fff;
             color: #fff;
-            padding: 0 12px;
+            padding: 0 var(--case-button-padding-x);
             font-family: 'Inter', sans-serif;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0;
+            text-transform: none;
+            letter-spacing: -0.2px;
             line-height: normal;
             outline: none;
             -webkit-appearance: none;
             appearance: none;
+            caret-color: #fff;
         }
 
         .access-input::placeholder {
-            color: #bdbdbd;
+            color: rgba(240, 240, 240, 0.88);
             opacity: 1;
             text-transform: uppercase;
-            letter-spacing: -0.2px;
+            letter-spacing: 0;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .access-input:focus {
+            border-color: #fff;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.14);
         }
         .access-submit {
             display: inline-flex;
@@ -1089,10 +1104,10 @@
             height: var(--case-button-height);
             padding: 0 var(--case-button-padding-x);
             font-family: 'Inter', sans-serif;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: -0.4px;
+            letter-spacing: -0.5px;
             line-height: 1;
             cursor: pointer;
             transition: background 0.3s, color 0.3s;
@@ -1377,257 +1392,6 @@
             max-height: 85vh;
         }
 
-        /* ═══════════════════════════════════
-           АДАПТИВ — TABLET
-           ═══════════════════════════════════ */
-        @media (max-width: 1024px) {
-
-        /* ═══════════════════════════════════
-           АДАПТИВ — MOBILE
-           ═══════════════════════════════════ */
-        @media (max-width: 768px) {
-            /* HEADER */
-
-            /* LORE */
-            .lore-section { padding: 70px 20px; }
-            .lore-text-block {
-                padding-left: 18px;
-                border-left-width: 4px;
-                margin-bottom: 24px;
-            }
-            .lore-text {
-                font-size: clamp(1.4rem, 5.5vw, 2rem);
-                line-height: 1.15;
-                letter-spacing: -1px;
-            }
-            .lore-text br { display: none; }
-            .redacted-block {
-                width: 110px;
-                height: 0.75em;
-            }
-            .lore-source { font-size: 12px; }
-
-            /* ABERRATION */
-            .aberration-section {
-                min-height: 60vh;
-                padding: 0 20px 20px;
-                justify-content: flex-end;
-            }
-            .aberration-image-box {
-                position: absolute;
-                top: 0; left: 0;
-                width: 100%; height: 100%;
-                background-size: 95% auto;
-                background-position: center;
-            }
-            video.aberration-image-box {
-                width: 95%;
-                left: 2.5%;
-            }
-            .anthology-text {
-                position: relative;
-                z-index: 2;
-                font-size: clamp(1rem, 3.8vw, 1.3rem);
-                line-height: 1.5;
-                padding-bottom: 8vh;
-                color: #e2e2e2;
-                text-shadow: 0 3px 12px rgba(0, 0, 0, 0.95);
-            }
-
-            /* CASES */
-            .cases-section { padding: 60px 20px; }
-            .cases-header { margin-bottom: 32px; }
-            .cases-title {
-                font-size: clamp(2rem, 8vw, 2.6rem);
-                letter-spacing: -1.2px;
-            }
-            .cases-subtitle {
-                font-size: clamp(0.95rem, 3.6vw, 1.1rem);
-                letter-spacing: -0.3px;
-            }
-            .cases-grid {
-                grid-template-columns: 1fr;
-                gap: 100px;
-            }
-            .case-card--featured .case-image {
-                aspect-ratio: 16 / 9;
-            }
-            .case-image { margin-bottom: 20px; }
-            .case-meta {
-                white-space: normal;
-                font-size: 11px;
-                line-height: 1.5;
-                margin-bottom: 12px;
-            }
-            .case-name {
-                font-size: clamp(2rem, 9vw, 2.6rem);
-                white-space: normal;
-                letter-spacing: -1.5px;
-                margin-bottom: 10px;
-            }
-            .case-desc {
-                font-size: 15px;
-                line-height: 1.4;
-                margin-bottom: 24px;
-            }
-            .case-desc br { display: none; }
-        .btn-steam {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            background-color: #fff;
-            color: #000;
-            text-decoration: none;
-            width: var(--case-button-width);
-            height: var(--case-button-height);
-            padding: 0 var(--case-button-padding-x);
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: -0.5px;
-            line-height: 1;
-            white-space: nowrap;
-            overflow: hidden;
-            align-self: flex-start;
-            transition: background-color 0.2s, color 0.2s;
-        }
-
-            /* EVIDENCE */
-            .evidence-section { padding: 70px 20px 50px; }
-            .evidence-header { margin-bottom: 36px; }
-            .evidence-title {
-                font-size: clamp(2rem, 8vw, 2.6rem);
-                letter-spacing: -1.2px;
-                margin-bottom: 8px;
-            }
-            .evidence-subtitle {
-                font-size: clamp(1rem, 3.8vw, 1.2rem);
-                letter-spacing: -0.3px;
-                margin-bottom: 20px;
-            }
-            .evidence-filters {
-                flex-wrap: wrap;
-                gap: 8px 12px;
-            }
-            .evidence-filter {
-                width: var(--case-button-width);
-                height: var(--case-button-height);
-                padding: 0 var(--case-button-padding-x);
-                font-size: 12px;
-                font-weight: 700;
-                letter-spacing: 0.5px;
-            }
-            .filter-separator {
-                font-size: 12px;
-                line-height: 42px;
-            }
-            .evidence-grid {
-                grid-template-columns: 1fr;
-                gap: 90px;
-            }
-            .evidence-card:nth-child(n) { margin-top: 0; }
-            .evidence-card.mobile-hidden { display: none !important; }
-            .evidence-meta {
-                font-size: 12px;
-                letter-spacing: 1px;
-                margin-bottom: 10px;
-            }
-        .evidence-name {
-            font-size: clamp(1.3rem, 5vw, 1.75rem);
-            letter-spacing: -0.5px;
-            line-height: 1.05;
-            font-weight: 700;
-        }
-
-        /* Censored/locked format for Analyst + Comfort cards */
-        .evidence-card[data-category="analyst"][data-access="sealed"] .evidence-meta,
-        .evidence-card[data-category="analyst"][data-access="sealed"] .evidence-name,
-        .evidence-card[data-category="comfort"] .evidence-meta,
-        .evidence-card[data-category="comfort"] .evidence-name {
-            color: #777 !important;
-            font-size: inherit;
-        }
-            .load-more-container {
-                text-align: center;
-                margin-top: 40px;
-            }
-            .btn-load-more {
-                width: var(--case-button-width);
-                height: var(--case-button-height);
-                padding: 0 var(--case-button-padding-x);
-                font-size: 12px;
-                letter-spacing: 0.5px;
-            }
-
-            /* ACCESS */
-            .access-header { padding: 60px 20px 24px; }
-            .access-title {
-                font-size: clamp(2rem, 9vw, 2.8rem);
-                letter-spacing: -0.07em;
-            }
-            .access-warning {
-                font-size: clamp(1rem, 4vw, 1.4rem);
-                letter-spacing: -0.07em;
-                line-height: 0.912;
-            }
-            .access-modal-card {
-                padding: 32px 22px 28px;
-                max-width: 520px;
-            }
-            .access-modal-buttons {
-                flex-direction: row;
-            }
-            .access-card-title {
-                font-size: clamp(1.6rem, 6.5vw, 2rem);
-                letter-spacing: -1px;
-                margin-bottom: 26px;
-            }
-            .access-modal-title {
-                font-size: clamp(1.6rem, 6.5vw, 2rem);
-                letter-spacing: -1px;
-                margin-bottom: 26px;
-            }
-            .term-line, .term-load-bar {
-                font-size: 14px;
-            }
-            .term-line#tl-8 {
-                margin-top: 16px !important;
-            }
-            .term-load-bar {
-                margin: 16px 0;
-            }
-
-            /* FOOTER */
-        }
-        }
-
-        /* ═══════════════════════════════════
-           АДАПТИВ — SMALL PHONES (≤420px)
-           ═══════════════════════════════════ */
-        @media (max-width: 420px) {
-            .main-title { font-size: clamp(2.4rem, 11vw, 3.4rem); letter-spacing: -1.4px; }
-            .lore-text { font-size: clamp(1.25rem, 5.5vw, 1.6rem); }
-            .redacted-block { width: 90px; }
-            .cases-title,
-            .evidence-title,
-            .access-title { font-size: clamp(1.7rem, 8vw, 2.2rem); }
-            .case-name { font-size: clamp(1.7rem, 9vw, 2.2rem); }
-            .evidence-name { font-size: clamp(1.15rem, 4.5vw, 1.5rem); }
-            .evidence-filter,
-            .filter-separator { font-size: 12px; }
-            .access-card { padding: 28px 18px 24px; }
-            .access-modal-card { padding: 28px 18px 24px; }
-            .access-card-title { font-size: clamp(1.4rem, 6.5vw, 1.7rem); }
-            .access-modal-title { font-size: clamp(1.4rem, 6.5vw, 1.7rem); }
-        }
-
-
-
-        /* -------------------------------------
-           MOBILE HOTFIXES (2026-05-11)
-           ------------------------------------- */
         @media (max-width: 1024px) {
             .case-name { white-space: normal; }
             .case-meta { white-space: normal; }
@@ -1638,6 +1402,14 @@
                 --case-button-width: max-content;
                 --case-button-height: 44px;
                 --case-button-padding-x: 16px;
+            }
+
+            .lore-section {
+                padding: 72px 20px 34px;
+            }
+
+            .lore-text-block {
+                margin-bottom: 18px;
             }
 
             .hero-section {
@@ -1765,20 +1537,21 @@
             }
 
             .evidence-meta {
-                font-size: 14px;
-                letter-spacing: 0.6px;
+                font-size: 16px;
+                letter-spacing: 0.4px;
             }
 
             .evidence-name {
-                font-size: clamp(1.25rem, 7vw, 1.9rem);
-                line-height: 1.05;
+                font-size: clamp(1.6rem, 8.2vw, 2.2rem);
+                line-height: 1.02;
+                font-weight: 800;
             }
 
             .evidence-card[data-category="analyst"][data-access="sealed"] .evidence-meta,
             .evidence-card[data-category="analyst"][data-access="sealed"] .evidence-name,
             .evidence-card[data-category="comfort"] .evidence-meta,
             .evidence-card[data-category="comfort"] .evidence-name {
-                font-size: inherit;
+                color: #999999 !important;
             }
 
             .btn-load-more {
@@ -1802,22 +1575,29 @@
             }
 
             .aberration-section {
-                min-height: 72vh;
+                min-height: 82vh;
+                padding: 0 20px 18px;
             }
 
             video.aberration-image-box {
-                width: 122%;
-                height: 122%;
-                left: -11%;
-                top: -8%;
+                width: 112%;
+                height: 112%;
+                left: -6%;
+                top: -4%;
                 opacity: 0.52;
                 filter: brightness(0.68) contrast(1.06);
                 object-fit: cover;
+                object-position: center bottom;
             }
 
             .aberration-logo-overlay {
                 width: min(94vw, 620px);
-                margin-bottom: 12px;
+                margin-bottom: 8px;
+            }
+
+            .aberration-section::after {
+                height: 28%;
+                background: linear-gradient(to top, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0));
             }
 
             .case-image--case01 {
@@ -1886,11 +1666,21 @@
                 -webkit-backdrop-filter: blur(2px);
             }
 
+            .access-card-title {
+                font-size: clamp(1.6rem, 6.5vw, 2rem);
+                letter-spacing: -1px;
+                margin-bottom: 26px;
+            }
+
+            .access-card-desc {
+                margin-bottom: 20px;
+            }
+
             .access-form {
                 width: 100%;
                 margin-bottom: 0;
-                display: flex;
-                flex-direction: column;
+                display: grid;
+                grid-template-columns: 1fr;
                 align-items: stretch;
                 gap: 10px;
             }
@@ -1900,33 +1690,34 @@
                 width: 100% !important;
                 min-width: 0;
                 max-width: none;
-                height: 50px;
+                height: var(--case-button-height);
                 box-sizing: border-box;
             }
 
             .access-input {
                 border-width: 2px;
                 background: rgba(0, 0, 0, 0.4);
-                font-size: 13px;
+                font-size: 14px;
                 font-weight: 800;
-                letter-spacing: 0;
+                letter-spacing: -0.2px;
                 line-height: normal;
-                padding: 0 14px;
-                text-transform: uppercase;
+                padding: 0 var(--case-button-padding-x);
+                text-transform: none;
             }
 
             .access-input::placeholder {
-                color: #d8d8d8;
+                color: #f0f0f0;
                 opacity: 1;
                 letter-spacing: 0;
                 text-transform: uppercase;
+                font-size: 14px;
             }
 
             .access-submit {
                 border-width: 2px;
-                font-size: 13px;
+                font-size: 14px;
                 font-weight: 800;
-                letter-spacing: -0.2px;
+                letter-spacing: -0.5px;
                 line-height: normal;
                 white-space: nowrap;
             }
@@ -1967,6 +1758,14 @@
             .case-image--classified {
                 max-height: 72vh;
             }
+
+            .access-card {
+                padding: 28px 18px 24px;
+            }
+
+            .access-card-title {
+                font-size: clamp(1.4rem, 6.5vw, 1.7rem);
+            }
         }
 
         @media (hover: none), (pointer: coarse) {
@@ -1985,3 +1784,4 @@
                 transform: scale(1.02);
             }
         }
+

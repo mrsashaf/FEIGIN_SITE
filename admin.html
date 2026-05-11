@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
 <title>FEIGIN — Visual Editor</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,9 +11,9 @@
 <link href="https://api.fontshare.com/v2/css?f[]=panchang@900&display=swap" rel="stylesheet">
 
 <style>
-/* ═══════════════════════════════════
+/* в•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђ
    SITE STYLES (scoped to .ed-canvas)
-   ═══════════════════════════════════ */
+   в•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђ */
 .ed-canvas {
     background-color: #000;
     color: #fff;
@@ -340,9 +341,9 @@
 .ed-canvas .copyright a { color: #fff; text-decoration: none; }
 .ed-canvas .legal-text { font-family: 'Roboto Mono', monospace; font-size: 15px; font-weight: 500; color: #777; letter-spacing: 0px; }
 
-/* ═══════════════════════════════════
+/* в•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђ
    EDITOR UI STYLES
-   ═══════════════════════════════════ */
+   в•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђ */
 * { margin:0; padding:0; box-sizing:border-box; }
 
 :root {
@@ -567,7 +568,7 @@ select.ed-input { cursor:pointer; }
     </div>
 </div>
 
-<!-- CANVAS — SITE CONTENT EMBEDDED DIRECTLY -->
+<!-- CANVAS вЂ” SITE CONTENT EMBEDDED DIRECTLY -->
 <div class="ed-canvas" id="edCanvas">
 
     <div class="ed-start-screen" id="startScreen">
@@ -589,7 +590,7 @@ select.ed-input { cursor:pointer; }
 <div id="dropOverlay">DROP HTML FILE HERE TO EDIT</div>
 
 <script>
-// ── FONT LIST ──
+// в”Ђв”Ђ FONT LIST в”Ђв”Ђ
 const FONTS = [
     'Inter, sans-serif',
     'Roboto Mono, monospace',
@@ -623,7 +624,7 @@ const FONTS = [
     'Trebuchet MS, sans-serif'
 ];
 
-// ── STATE ──
+// в”Ђв”Ђ STATE в”Ђв”Ђ
 let sel = null;
 let undoStack = [];
 let redoStack = [];
@@ -637,13 +638,13 @@ const canvas = document.getElementById('edCanvas');
 const props = document.getElementById('edProps');
 const status = document.getElementById('edStatus');
 
-// ── LOAD SAVED ──
+// в”Ђв”Ђ LOAD SAVED в”Ђв”Ђ
 (function() {
     const saved = localStorage.getItem('feigin_editor_html');
     if (saved) { canvas.innerHTML = saved; notify('Loaded saved version'); }
 })();
 
-// ── DRAG AND DROP HTML TO LOAD ──
+// в”Ђв”Ђ DRAG AND DROP HTML TO LOAD в”Ђв”Ђ
 const dropOverlay = document.getElementById('dropOverlay');
 let dragCounter = 0;
 
@@ -655,7 +656,7 @@ function handleHtmlFile(file) {
             const parser = new DOMParser();
             const doc = parser.parseFromString(htmlText, 'text/html');
             
-            // Извлекаем body, удаляем скрипты и .ed-canvas обертки
+            // РР·РІР»РµРєР°РµРј body, СѓРґР°Р»СЏРµРј СЃРєСЂРёРїС‚С‹ Рё .ed-canvas РѕР±РµСЂС‚РєРё
             let newContent = doc.body;
             const canvasInside = doc.querySelector('.ed-canvas');
             if (canvasInside) newContent = canvasInside;
@@ -710,7 +711,7 @@ window.addEventListener('drop', e => {
     }
 });
 
-// ── RESIZE HANDLES ──
+// в”Ђв”Ђ RESIZE HANDLES в”Ђв”Ђ
 function showHandles(el) {
     removeHandles();
     const rect = el.getBoundingClientRect();
@@ -744,7 +745,7 @@ function updateHandles(el) {
     handlesEl.style.height = rect.height + 'px';
 }
 
-// ── RESIZE LOGIC ──
+// в”Ђв”Ђ RESIZE LOGIC в”Ђв”Ђ
 function startResize(e, pos, el) {
     e.stopPropagation();
     e.preventDefault();
@@ -791,7 +792,7 @@ function onResize(e) {
     el.style.height = h + 'px';
 
     updateHandles(el);
-    sizeTip.textContent = `${Math.round(w)} × ${Math.round(h)}`;
+    sizeTip.textContent = `${Math.round(w)} Г— ${Math.round(h)}`;
     sizeTip.style.left = (e.clientX + 15) + 'px';
     sizeTip.style.top = (e.clientY + 15) + 'px';
 }
@@ -806,7 +807,7 @@ function endResize() {
     if (sel) { updateHandles(sel); buildProps(); }
 }
 
-// ── DRAG LOGIC ──
+// в”Ђв”Ђ DRAG LOGIC в”Ђв”Ђ
 function startDrag(e, el) {
     if (isResizing) return;
     isDragging = true;
@@ -845,7 +846,7 @@ function endDrag() {
     if (sel) buildProps();
 }
 
-// ── LISTENERS ──
+// в”Ђв”Ђ LISTENERS в”Ђв”Ђ
 canvas.addEventListener('mouseover', e => {
     const el = e.target;
     if (el === canvas || el.closest('.ed-topbar,.ed-sidebar,.ed-handles')) return;
@@ -920,7 +921,7 @@ function selectEl(el) {
     buildProps();
 }
 
-// ── BUILD PROPERTIES ──
+// в”Ђв”Ђ BUILD PROPERTIES в”Ђв”Ђ
 function buildProps() {
     if (!sel) return;
     const el = sel;
@@ -929,7 +930,7 @@ function buildProps() {
     const cls = (el.className||'').replace(/ed-highlight|ed-selected/g,'').trim();
     const curFont = cs.fontFamily.split(',')[0].replace(/['"]/g,'').trim();
 
-    let h = `<div class="ed-el-info"><span class="ed-el-tag">${tag}</span><span class="ed-el-cls">${cls||'—'}</span></div>`;
+    let h = `<div class="ed-el-info"><span class="ed-el-tag">${tag}</span><span class="ed-el-cls">${cls||'вЂ”'}</span></div>`;
 
     // Move & Position
     h += `<div class="ed-panel"><div class="ed-panel-title">Position & Move</div>
@@ -1066,7 +1067,7 @@ function buildProps() {
     bindAll();
 }
 
-// ── BIND ALL INPUTS ──
+// в”Ђв”Ђ BIND ALL INPUTS в”Ђв”Ђ
 function bindAll() {
     const el = sel;
     if (!el) return;
@@ -1168,7 +1169,7 @@ function readF(f, cb) {
     r.readAsDataURL(f);
 }
 
-// ── UNDO/REDO ──
+// в”Ђв”Ђ UNDO/REDO в”Ђв”Ђ
 function pushUndo(label) {
     undoStack.push({ label, html: canvas.innerHTML });
     if (undoStack.length > 30) undoStack.shift();
@@ -1210,7 +1211,7 @@ function edDelete() {
     notify('Deleted');
 }
 
-// ── SAVE / RESET / EXPORT ──
+// в”Ђв”Ђ SAVE / RESET / EXPORT в”Ђв”Ђ
 function edSave() {
     const c = canvas.cloneNode(true);
     clean(c);
@@ -1241,6 +1242,7 @@ function edExport() {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
 <title>FEIGIN</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1387,4 +1389,5 @@ document.addEventListener('keydown', e => {
 </script>
 </body>
 </html>
+
 

@@ -3,13 +3,11 @@
  * Used on index.html only
  */
 document.addEventListener('DOMContentLoaded', () => {
+    const accessState = window.FEIGIN_ACCESS_STATE;
+    if (!accessState) return;
+
     const DECRYPTION_TIMER_KEY = 'aberration_decryption_deadline_ms';
     const DECRYPTION_WINDOW_MS = 14 * 24 * 60 * 60 * 1000;
-
-    const fromStorage = window.FEIGIN_CLEARANCE && window.FEIGIN_CLEARANCE.hasLevel2();
-    if (typeof window.hasLevel2Access !== 'boolean') {
-        window.hasLevel2Access = !!fromStorage;
-    }
 
     // Keep FILE_00 teaser video always running in muted loop.
     const file00Video = document.querySelector('.evidence-card[data-category="analyst"][data-access="public"] .preview-video');
@@ -64,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         card.addEventListener('click', () => {
             const access = card.dataset.access;
 
-            if (access === 'public' || (access === 'level-2' && window.hasLevel2Access)) {
+            if (access === 'public' || (access === 'level-2' && accessState.hasLevel2())) {
                 triggerInCardWarning(card, 'decrypting');
             } else if (access === 'level-2') {
                 triggerInCardWarning(card, 'level-2');
@@ -117,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         case02AccessBtn.addEventListener('click', (e) => {
-            if (window.hasLevel2Access) {
+            if (accessState.hasLevel2()) {
                 return;
             }
             e.preventDefault();
@@ -320,18 +318,6 @@ document.addEventListener('DOMContentLoaded', () => {
         overlay.style.display = 'flex';
         modalPublic.style.display = 'block';
         document.body.style.overflow = 'hidden';
-    }
-
-    // Set hasLevel2Access on clearance form submit
-    const clearanceForm = document.getElementById('clearanceForm');
-    if (clearanceForm) {
-        clearanceForm.addEventListener('submit', (e) => {
-            setTimeout(() => {
-                if (window.FEIGIN_CLEARANCE && window.FEIGIN_CLEARANCE.hasLevel2()) {
-                    window.hasLevel2Access = true;
-                }
-            }, 3500);
-        });
     }
 
     // Close modal handlers

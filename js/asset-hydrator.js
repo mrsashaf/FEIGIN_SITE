@@ -1,13 +1,12 @@
 /**
  * Asset Hydrator
- * Convention-based asset loading for index/case pages.
- * If a slot has a video file, it renders as video; otherwise as image.
+ * Centralized evidence + case slot media hydration.
  */
 (function () {
     const EXTENSIONS = ['mp4', 'webm', 'png', 'jpg', 'jpeg', 'webp'];
     const VIDEO_EXTENSIONS = new Set(['mp4', 'webm']);
     const cache = new Map();
-    const FIXED_EVIDENCE_SLOTS = new Set(['file-01', 'file-02', 'file-03']);
+    const evidenceConfig = window.FEIGIN_EVIDENCE_CONFIG || { slots: {} };
 
     async function fileExists(url) {
         if (cache.has(url)) return cache.get(url);
@@ -30,6 +29,12 @@
             }
         }
         return null;
+    }
+
+    function getExtFromUrl(url) {
+        const clean = (url || '').split('?')[0].split('#')[0];
+        const parts = clean.split('.');
+        return parts.length > 1 ? parts.pop().toLowerCase() : '';
     }
 
     function renderVideo(container, src) {
@@ -56,12 +61,18 @@
     async function hydrateEvidenceCards() {
         const cards = Array.from(document.querySelectorAll('[data-evidence-slot]'));
         for (const cardImage of cards) {
-            if (cardImage.dataset.fixedMedia === 'true') continue;
             const slot = cardImage.dataset.evidenceSlot;
             if (!slot) continue;
-            if (FIXED_EVIDENCE_SLOTS.has(slot)) continue;
+            const explicit = evidenceConfig.slots && evidenceConfig.slots[slot] ? evidenceConfig.slots[slot] : null;
+            let resolved = null;
 
-            const resolved = await resolveSlot(`assets/evidence/slots/${slot}`);
+            if (explicit && explicit.src) {
+                const ext = getExtFromUrl(explicit.src);
+                resolved = { url: explicit.src, ext };
+            } else {
+                resolved = await resolveSlot(`assets/evidence/slots/${slot}`);
+            }
+
             if (!resolved) continue;
 
             // Remove legacy media if present
