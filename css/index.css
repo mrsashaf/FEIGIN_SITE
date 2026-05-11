@@ -1442,11 +1442,12 @@
             }
 
             .hero-buttons .btn-clearance {
-                width: auto;
+                width: calc(50% - 5px);
                 min-width: 0;
-                padding-left: 12px;
-                padding-right: 12px;
-                font-size: 10px;
+                height: var(--case-button-height);
+                padding-left: 10px;
+                padding-right: 10px;
+                font-size: 11px;
                 justify-content: center;
             }
 
@@ -1575,19 +1576,19 @@
             }
 
             .aberration-section {
-                min-height: 82vh;
+                min-height: 72vh;
                 padding: 0 20px 18px;
             }
 
             video.aberration-image-box {
-                width: 112%;
-                height: 112%;
-                left: -6%;
-                top: -4%;
+                width: 108%;
+                height: 108%;
+                left: -4%;
+                top: -2%;
                 opacity: 0.52;
                 filter: brightness(0.68) contrast(1.06);
                 object-fit: cover;
-                object-position: center bottom;
+                object-position: center 62%;
             }
 
             .aberration-logo-overlay {
