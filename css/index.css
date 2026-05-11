@@ -130,6 +130,8 @@
             align-items: center;
             justify-content: flex-end;
             padding: 0 20px 40px;
+            overflow: hidden;
+            isolation: isolate;
         }
 
         .aberration-section::after {
@@ -188,9 +190,12 @@
            СЕКЦИЯ 4: FIELD CASES (ИДЕАЛЬНАЯ ТИПОГРАФИКА)
            ------------------------------------- */
         .cases-section {
+            position: relative;
+            z-index: 3;
             padding: 100px 20px;
             max-width: 1500px;
             margin: 0 auto;
+            background-color: #000;
         }
 
         .cases-header {
@@ -1896,22 +1901,25 @@
                 min-width: 0;
                 max-width: none;
                 height: 50px;
+                box-sizing: border-box;
             }
 
             .access-input {
-                border-width: 3px;
-                background: rgba(0, 0, 0, 0.45);
-                font-size: 15px;
-                font-weight: 700;
+                border-width: 2px;
+                background: rgba(0, 0, 0, 0.4);
+                font-size: 13px;
+                font-weight: 800;
                 letter-spacing: 0;
-                line-height: 50px;
+                line-height: normal;
                 padding: 0 14px;
+                text-transform: uppercase;
             }
 
             .access-input::placeholder {
                 color: #d8d8d8;
                 opacity: 1;
                 letter-spacing: 0;
+                text-transform: uppercase;
             }
 
             .access-submit {
@@ -1919,6 +1927,7 @@
                 font-size: 13px;
                 font-weight: 800;
                 letter-spacing: -0.2px;
+                line-height: normal;
                 white-space: nowrap;
             }
         }
