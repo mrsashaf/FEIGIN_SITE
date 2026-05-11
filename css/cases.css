@@ -1,0 +1,335 @@
+/* =============================================
+   CASE PAGE STYLES — used by case pages
+   (analyst.html, censored.html, future cases)
+   ============================================= */
+
+/* --- CASE HERO --- */
+.case-hero {
+    width: 100%;
+    height: 100vh;
+    background-color: #000;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-bottom: 60px;
+}
+
+.case-hero--analyst {
+    background-image: none;
+}
+
+.case-hero-media {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center top;
+    display: block;
+}
+
+.case-hero--censored {
+    background-image: url('../assets/cases/case-02-comfort-zone/censored/hero.png');
+}
+
+/* --- CASE CONTAINER --- */
+.case-container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.case-header-info {
+    display: flex;
+    flex-direction: column;
+    max-width: 900px;
+    width: 100%;
+    margin: 0;
+}
+
+/* --- CASE META (override for case pages) --- */
+.case-page .case-meta {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 16px;
+    letter-spacing: 0px;
+    white-space: nowrap;
+}
+.case-page .case-meta .meta-gray { color: #888888; font-weight: 500; }
+
+/* --- CASE NAME (override for case pages) --- */
+.case-page .case-name {
+    font-size: 42px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -2.5px;
+    margin-bottom: 12px;
+    line-height: 1;
+    margin-top: 0;
+    white-space: nowrap;
+}
+
+/* --- CASE DESC (override for case pages) --- */
+.case-page .case-desc {
+    font-size: 18px;
+    font-weight: 600;
+    color: #999999;
+    letter-spacing: -0.2px;
+    margin-bottom: 30px;
+    line-height: 1.3;
+}
+
+.case-header-info + .case-buttons {
+    margin-top: -10px;
+}
+
+/* --- SECTION NUMBERS --- */
+.section-number {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    color: #fff;
+    margin-bottom: 0;
+    line-height: 1;
+    max-width: 900px;
+    width: 100%;
+    margin: 34px 0 0;
+}
+
+/* --- LORE TEXT (case page variants) --- */
+.case-page .lore-text-block {
+    border-left: none;
+    padding-left: 0;
+    margin-bottom: 24px;
+    margin-top: 20px;
+    max-width: 900px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.case-page .lore-text {
+    font-size: clamp(1rem, 2vw, 1.6rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.5px;
+    color: #888;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto 12px;
+    border-left: 18px solid #888;
+    padding-left: 24px;
+    text-align: left;
+}
+.case-page .lore-text .highlight { color: #888; font-weight: 700; }
+
+.highlight--gray {
+    color: #6f6f6f !important;
+}
+
+.lore-text--analyst-body {
+    padding-left: 28px;
+    margin-bottom: 52px;
+    color: #888;
+}
+
+.lore-text--mb-1em {
+    margin-bottom: 1em;
+}
+
+.case-page .lore-source {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 14px;
+    font-weight: 400;
+    color: #888;
+    text-transform: uppercase;
+    margin-top: 12px;
+    letter-spacing: 0;
+    display: block;
+    max-width: 900px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: right;
+}
+
+.lore-source--dim {
+    color: #444;
+}
+
+/* --- REDACTION --- */
+.redacted {
+    display: inline-block;
+    background-color: #888;
+    color: transparent;
+    padding: 0;
+    user-select: none;
+    cursor: default;
+    height: 0.85em;
+    line-height: 0.85em;
+    vertical-align: middle;
+    overflow: hidden;
+    margin: 0 2px;
+}
+
+/* Gray lore variant */
+.lore-text-block--gray {
+    border-left-color: transparent !important;
+}
+.lore-text-block--gray .lore-text {
+    color: #888 !important;
+    border-left-color: #888 !important;
+}
+.lore-text-block--gray .highlight {
+    color: #888 !important;
+}
+.lore-text-block--gray .redacted {
+    background-color: #888 !important;
+}
+
+.lore-text-block--tight-bottom {
+    margin-bottom: 16px !important;
+}
+
+.lore-text-block--mb-80 {
+    margin-bottom: 80px !important;
+}
+
+.section-number--gray {
+    color: #888 !important;
+}
+
+/* --- CASE IMAGES --- */
+.case-images-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    margin: 24px 0 52px;
+}
+
+.case-image-full {
+    width: 100%;
+    height: auto;
+    display: block;
+    background-color: #000;
+}
+
+.case-buttons--centered-top-gap {
+    margin-top: 60px;
+    justify-content: center;
+}
+
+.btn-clearance--archive {
+    background-color: #fff;
+    color: #000;
+    padding: 0 22px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+}
+
+.nav-censored--active {
+    color: #ff4a4a !important;
+}
+
+/* --- CASE CONCLUSION --- */
+.case-conclusion {
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    color: #aaa;
+    margin-bottom: 80px;
+    max-width: 900px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- PLACEHOLDER LABEL --- */
+.placeholder-label {
+    font-family: 'Roboto Mono', monospace;
+    color: #555;
+    font-size: clamp(14px, 2vw, 18px);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* =============================================
+   RESPONSIVE — CASE PAGES
+   ============================================= */
+@media (max-width: 768px) {
+    .case-hero {
+        aspect-ratio: 16 / 9;
+        height: auto;
+        margin-bottom: 40px;
+    }
+    .case-container {
+        padding: 0 20px 50px;
+        gap: 28px;
+    }
+    .case-page .case-meta {
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        margin-bottom: 12px;
+    }
+    .case-page .case-name {
+        font-size: clamp(2rem, 9vw, 2.8rem);
+        letter-spacing: -1.5px;
+    }
+    .case-page .case-desc {
+        font-size: clamp(0.95rem, 3.6vw, 1.1rem);
+        letter-spacing: -0.3px;
+        line-height: 1.4;
+        margin-bottom: 24px;
+    }
+    .case-page .lore-text-block {
+        padding-left: 0;
+        border-left-width: 0;
+        margin-top: 12px;
+        margin-bottom: 16px;
+    }
+    .case-page .lore-text {
+        font-size: clamp(0.72rem, 3vw, 1rem);
+        line-height: 1.15;
+        letter-spacing: -0.3px;
+        border-left-width: 12px;
+        padding-left: 14px;
+    }
+    .case-images-stack {
+        gap: 28px;
+        margin: 16px 0 34px;
+    }
+    .case-conclusion {
+        font-size: clamp(1.05rem, 4.6vw, 1.4rem);
+        letter-spacing: -0.5px;
+        margin-bottom: 50px;
+    }
+    .section-number {
+        font-size: clamp(22px, 6vw, 32px);
+        margin-top: 24px;
+    }
+    .case-buttons { flex-direction: row; }
+    .case-page .btn-steam,
+    .case-page .btn-steam--outline {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 420px) {
+    .case-hero { aspect-ratio: 16 / 9; }
+    .case-page .case-name { font-size: clamp(1.7rem, 9vw, 2.2rem); }
+    .case-page .lore-text { font-size: clamp(1.25rem, 5.5vw, 1.6rem); }
+    .case-conclusion { font-size: clamp(0.95rem, 4.6vw, 1.2rem); }
+}

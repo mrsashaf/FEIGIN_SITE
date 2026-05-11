@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRISM // Clearance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; background: #000; color: #fff; font-family: Inter, Arial, sans-serif; }
+    .wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      width: min(760px, 100%);
+      border: 2px solid #fff;
+      padding: 28px;
+      background: #050505;
+    }
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      line-height: 0.95;
+    }
+    p {
+      margin: 0 0 22px;
+      color: #aaa;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 42px;
+      padding: 0 22px;
+      background: #fff;
+      color: #000;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .muted { color: #666; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1 id="title">PRISM // TRANSMISSION CHECK</h1>
+      <p id="desc" class="muted">Invalid clearance token.</p>
+      <a id="cta" class="btn" href="index.html#archive">ENTER ARCHIVE</a>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const level = params.get('level');
+      const title = document.getElementById('title');
+      const desc = document.getElementById('desc');
+      const cta = document.getElementById('cta');
+
+      if (level === '2') {
+        localStorage.setItem('aberration_clearance_level', '2');
+        title.textContent = 'PRISM // LEVEL 2 ACCESS GRANTED';
+        desc.textContent = 'Restricted archive unlocked.';
+        cta.textContent = 'ENTER ARCHIVE';
+        cta.href = 'index.html#archive';
+      } else {
+        title.textContent = 'PRISM // ACCESS DENIED';
+        desc.textContent = 'Clearance token is missing or invalid.';
+        cta.textContent = 'RETURN TO INDEX';
+        cta.href = 'index.html#clearance';
+      }
+    })();
+  </script>
+</body>
+</html>
+

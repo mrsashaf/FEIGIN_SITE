@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FEIGIN — Design System</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700;800;900&family=Roboto+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <link href="https://api.fontshare.com/v2/css?f[]=panchang@900&display=swap" rel="stylesheet">
+
+    <style>
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ─── HEADER (same as site) ─── */
+        .header {
+            position: absolute;
+            top: 0; left: 0; width: 100%;
+            padding: 40px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            z-index: 10;
+        }
+        .header-logo { height: 48px; width: auto; }
+        .nav-menu {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+        }
+        .nav-menu a { color: #fff; text-decoration: none; transition: color 0.3s ease; }
+        .nav-menu a:hover { color: #ccc; }
+        .nav-censored { color: #888 !important; transition: color 0.3s ease !important; }
+        .nav-censored:hover { color: #ff4a4a !important; }
+        .nav-separator { margin: 0 10px; color: #555; }
+
+        /* ─── HERO ─── */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #0a0a0a;
+            padding: 120px 20px 80px;
+        }
+        .hero-content { text-align: center; max-width: 1100px; }
+        .hero-meta {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 13px;
+            font-weight: 500;
+            color: #888;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+        .hero-title {
+            font-size: clamp(3rem, 9vw, 9rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 0.9;
+            letter-spacing: -2px;
+            margin-bottom: 30px;
+        }
+        .hero-warning {
+            font-size: clamp(1.2rem, 2.5vw, 2rem);
+            font-weight: 600;
+            color: #ff4444;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+
+        /* ─── SECTION PATTERN (same as cases/evidence-section) ─── */
+        .ds-section {
+            padding: 100px 20px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .ds-section-header { margin-bottom: 50px; }
+        /* matches .evidence-meta from main site */
+        .ds-section-meta {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 15.3px;
+            font-weight: 500;
+            color: #555;
+            letter-spacing: 0;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+        .ds-section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            margin-bottom: 5px;
+            line-height: 1;
+        }
+        .ds-section-sub {
+            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            font-weight: 600;
+            color: #888;
+            letter-spacing: -0.5px;
+            max-width: 780px;
+        }
+
+        /* ─── LORE-TEXT pattern (callouts) ─── */
+        .lore-text-block {
+            border-left: 6px solid #fff;
+            padding-left: 30px;
+            margin-bottom: 30px;
+        }
+        .lore-text {
+            font-size: clamp(1.6rem, 3vw, 2.4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            color: #d1d1d1;
+        }
+        .lore-text .highlight { color: #fff; font-weight: 700; }
+        .lore-text .red { color: #ff4444; }
+
+        /* ─── FONT CARDS (same as case-card pattern) ─── */
+        .ds-grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 50px;
+        }
+        .ds-card {
+            display: flex;
+            flex-direction: column;
+        }
+        .ds-card-meta {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 16px;
+            letter-spacing: 0;
+            text-transform: uppercase;
+        }
+        .ds-card-meta .meta-gray { color: #888; font-weight: 500; }
+        .ds-card-sample {
+            font-size: 56px;
+            line-height: 1;
+            margin-bottom: 24px;
+            color: #fff;
+        }
+        .ds-card-desc {
+            font-size: 16px;
+            color: #999;
+            line-height: 1.4;
+            font-weight: 500;
+            letter-spacing: -0.2px;
+        }
+        .ds-card-desc b { color: #fff; font-weight: 700; }
+        .font-inter { font-family: 'Inter', sans-serif; font-weight: 800; }
+        .font-mono { font-family: 'Roboto Mono', monospace; font-weight: 700; }
+        .font-panchang { font-family: 'Panchang', sans-serif; font-weight: 900; }
+
+        /* ─── SCALE LIST (case-meta + sample row pattern) ─── */
+        .scale-row {
+            display: grid;
+            grid-template-columns: 110px 1fr 320px;
+            gap: 30px;
+            align-items: center;
+            padding: 28px 0;
+            border-bottom: 1px solid #111;
+        }
+        .scale-row:last-child { border-bottom: none; }
+        .scale-num {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0;
+            text-transform: uppercase;
+        }
+        .scale-num .meta-gray { color: #888; font-weight: 500; }
+        .scale-sample {
+            font-family: 'Inter', sans-serif;
+            color: #fff;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .scale-meta {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 13px;
+            font-weight: 500;
+            color: #888;
+            line-height: 1.5;
+            text-transform: uppercase;
+            letter-spacing: 0;
+        }
+        .scale-meta b { color: #fff; font-weight: 700; }
+
+        /* ─── WEIGHT LIST ─── */
+        .weight-row {
+            display: grid;
+            grid-template-columns: 100px 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+            padding: 22px 0;
+            border-bottom: 1px solid #111;
+        }
+        .weight-row:last-child { border-bottom: none; }
+        .weight-num {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
+        }
+        .weight-sample {
+            font-family: 'Inter', sans-serif;
+            font-size: 28px;
+            line-height: 1;
+        }
+        .weight-use {
+            font-size: 16px;
+            color: #999;
+            line-height: 1.4;
+            font-weight: 500;
+            letter-spacing: -0.2px;
+        }
+
+        /* ─── COLOR SWATCH (same minimal style) ─── */
+        .swatches {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        .swatch { display: flex; flex-direction: column; }
+        .swatch-color {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            margin-bottom: 16px;
+        }
+        .swatch-meta {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .swatch-meta .meta-gray { color: #888; font-weight: 500; }
+        .swatch-name {
+            font-size: 18px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+            line-height: 1;
+        }
+        .swatch-use {
+            font-size: 14px;
+            color: #888;
+            line-height: 1.4;
+            font-weight: 500;
+        }
+
+        /* ─── RULES (lore-text-block pattern variants) ─── */
+        .rules-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        .rule-block {
+            border-left: 6px solid #fff;
+            padding-left: 30px;
+        }
+        .rule-block.dont { border-left-color: #ff4444; }
+        .rule-tag {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .rule-block.dont .rule-tag { color: #ff4444; }
+        .rule-tag .meta-gray { color: #888; font-weight: 500; }
+        .rule-text {
+            font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+            font-weight: 600;
+            line-height: 1.25;
+            letter-spacing: -0.5px;
+            color: #d1d1d1;
+        }
+        .rule-text code {
+            font-family: 'Roboto Mono', monospace;
+            color: #fff;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+
+        /* ─── COMPONENT TABLE ─── */
+        .ds-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        .ds-table th {
+            text-align: left;
+            padding: 18px 20px 18px 0;
+            border-bottom: 2px solid #111;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0;
+        }
+        .ds-table td {
+            padding: 18px 20px 18px 0;
+            border-bottom: 1px solid #111;
+            vertical-align: top;
+        }
+        .ds-table .cls {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 13px;
+            color: #fff;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .ds-table .num {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 13px;
+            color: #fff;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .ds-table .desc {
+            font-size: 14px;
+            color: #888;
+            line-height: 1.4;
+            font-weight: 500;
+        }
+        .ds-table .desc b { color: #fff; font-weight: 700; }
+
+        /* ─── BREAKPOINT TABLE ─── */
+        .bp-row {
+            display: grid;
+            grid-template-columns: 320px 160px 1fr;
+            gap: 30px;
+            padding: 22px 0;
+            border-bottom: 1px solid #111;
+            align-items: start;
+        }
+        .bp-row:last-child { border-bottom: none; }
+        .bp-cls {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+        }
+        .bp-w {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 13px;
+            font-weight: 500;
+            color: #888;
+        }
+        .bp-d {
+            font-size: 15px;
+            color: #999;
+            line-height: 1.4;
+            font-weight: 500;
+            letter-spacing: -0.2px;
+        }
+
+        /* ─── DIVIDER ─── */
+        .ds-divider {
+            border: none;
+            border-top: 1px solid #111;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* ─── FOOTER (same as site) ─── */
+        .footer-section {
+            background-color: #000;
+            padding: 80px 20px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .footer-logo { margin-bottom: 10px; }
+        .footer-logo img { max-width: clamp(260px, 30vw, 360px); height: auto; }
+        .footer-links {
+            font-family: 'Inter', sans-serif;
+            font-size: 29px;
+            color: #aaa;
+            margin-bottom: 100px;
+            font-weight: 400;
+            letter-spacing: -0.07em;
+            line-height: 0.912;
+        }
+        .footer-links a { color: #aaa; text-decoration: none; transition: color 0.3s; }
+        .footer-links a:hover { color: #fff; }
+        .footer-contact { margin-bottom: 140px; }
+        .btn-contact {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            background-color: #fff;
+            color: #000;
+            width: 212px;
+            height: 42px;
+            padding: 0 22px;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            line-height: 1;
+            text-decoration: none;
+            transition: background 0.3s, color 0.3s;
+        }
+        .btn-contact:hover { background-color: #ccc; }
+        .copyright {
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            line-height: 0.912;
+            margin-bottom: 20px;
+        }
+        .copyright a { color: #fff; text-decoration: none; }
+        .legal-text {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 15px;
+            font-weight: 500;
+            color: #9c9c9c;
+        }
+
+        /* ─── MOBILE ─── */
+        @media (max-width: 1024px) {
+            .header { padding: 28px 30px; }
+            .ds-section { padding: 80px 24px; }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: center;
+                padding: 24px 20px;
+                gap: 16px;
+            }
+            .header-logo { height: 44px; }
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px 14px;
+                font-size: 11px;
+                letter-spacing: 0.6px;
+                line-height: 1.4;
+            }
+            .nav-separator { display: none; }
+
+            .hero-section { padding: 110px 20px 60px; min-height: auto; }
+            .hero-title { font-size: clamp(2.6rem, 12vw, 4rem); letter-spacing: -1.6px; line-height: 0.95; }
+            .hero-meta { font-size: 11px; letter-spacing: 1px; margin-bottom: 18px; }
+            .hero-warning { font-size: clamp(0.95rem, 3.8vw, 1.2rem); }
+
+            .ds-section { padding: 60px 20px; }
+            .ds-section-header { margin-bottom: 32px; }
+            .ds-section-title { font-size: clamp(2rem, 8vw, 2.6rem); letter-spacing: -1.2px; }
+            .ds-section-sub { font-size: clamp(0.95rem, 3.6vw, 1.1rem); letter-spacing: -0.3px; }
+
+            .lore-text { font-size: clamp(1.05rem, 4.6vw, 1.4rem); line-height: 1.2; letter-spacing: -0.5px; }
+            .lore-text-block { padding-left: 18px; border-left-width: 4px; }
+
+            .ds-grid-3 { grid-template-columns: 1fr; gap: 50px; }
+            .ds-card-sample { font-size: 44px; }
+
+            .scale-row { grid-template-columns: 1fr; gap: 8px; padding: 22px 0; }
+            .weight-row { grid-template-columns: 70px 1fr; }
+            .weight-row .weight-use { grid-column: 1 / -1; padding-top: 4px; }
+
+            .swatches { grid-template-columns: 1fr 1fr; gap: 24px; }
+
+            .rules-grid { grid-template-columns: 1fr; gap: 24px; }
+            .rule-block { padding-left: 18px; border-left-width: 4px; }
+
+            .bp-row { grid-template-columns: 1fr; gap: 6px; }
+
+            .footer-section { padding: 60px 20px 30px; }
+            .footer-logo { margin-bottom: 24px; }
+            .footer-logo img { max-width: clamp(220px, 80vw, 360px); }
+            .footer-links { font-size: 14px; margin-bottom: 50px; line-height: 1.8; max-width: 320px; }
+            .footer-contact { margin-bottom: 60px; }
+        .btn-contact {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            background-color: #fff;
+            color: #000;
+            width: 212px;
+            height: 42px;
+            padding: 0 22px;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            line-height: 1;
+            text-decoration: none;
+            transition: background 0.3s, color 0.3s;
+        }
+            .copyright { font-size: 13px; letter-spacing: 0.5px; margin-bottom: 12px; }
+            .legal-text { font-size: 11px; max-width: 320px; line-height: 1.5; margin: 0 auto; }
+
+            .ds-table { font-size: 12px; }
+            .ds-table th, .ds-table td { padding: 14px 12px 14px 0; }
+        }
+
+        @media (max-width: 420px) {
+            .hero-title { font-size: clamp(2.4rem, 11vw, 3.4rem); letter-spacing: -1.4px; }
+            .swatches { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <a href="index.html"><img src="assets/brand/feigin-logo.png" alt="FEIGIN" class="header-logo"></a>
+        <nav class="nav-menu">
+            <a href="index.html#works">WORKS</a><span class="nav-separator">\</span><a href="index.html#archive">ARCHIVE</a><span class="nav-separator">\</span><a href="index.html#about">ABOUT</a><span class="nav-separator">\</span><a href="index.html#clearance">CLEARANCE</a><span class="nav-separator">\</span><a href="censored.html" class="nav-censored">CENSORED</a>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="hero-meta">[ INTERNAL DOCUMENT — v1.0 ]</div>
+            <h1 class="hero-title">DESIGN<br>SYSTEM</h1>
+            <p class="hero-warning">LOCKED RULES. NO NEW FONTS. NO NEW COLORS.</p>
+        </div>
+    </section>
+
+    <!-- 01 / FONTS -->
+    <section class="ds-section">
+        <div class="ds-section-header">
+            <div class="ds-section-meta">[ 01 / FONTS ]</div>
+            <h2 class="ds-section-title">Шрифты</h2>
+            <p class="ds-section-sub">Только три семейства. Каждое работает в строго определённой роли.</p>
+        </div>
+
+        <div class="ds-grid-3">
+            <div class="ds-card">
+                <div class="ds-card-meta"><span class="meta-gray">[ PRIMARY ]</span> INTER</div>
+                <div class="ds-card-sample font-inter">Aa Бб 123</div>
+                <div class="ds-card-desc">
+                    <b>Использовать для:</b> заголовков, описаний, кнопок, всего body.
+                    <b>Веса:</b> 100 / 300 / 400 / 500 / 600 / 700 / 800 / 900.
+                </div>
+            </div>
+
+            <div class="ds-card">
+                <div class="ds-card-meta"><span class="meta-gray">[ TECH ]</span> ROBOTO MONO</div>
+                <div class="ds-card-sample font-mono">AA 123</div>
+                <div class="ds-card-desc">
+                    <b>Использовать для:</b> tech-меток, фильтров, legal-текста, caution-сносок.
+                    <b>Признак:</b> моноширинный, всегда UPPERCASE с positive letter-spacing.
+                </div>
+            </div>
+
+            <div class="ds-card">
+                <div class="ds-card-meta"><span class="meta-gray">[ DISPLAY ]</span> PANCHANG 900</div>
+                <div class="ds-card-sample font-panchang">[ AB ]</div>
+                <div class="ds-card-desc">
+                    <b>Использовать для:</b> только логотипа ABERRATION на печати.
+                    <b>Запрещено</b> применять где-либо ещё.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- 02 / TYPE SCALE -->
+    <section class="ds-section">
+        <div class="ds-section-header">
+            <div class="ds-section-meta">[ 02 / TYPE SCALE ]</div>
+            <h2 class="ds-section-title">Размеры</h2>
+            <p class="ds-section-sub">Все размеры через clamp(). На мобильном — минимум, на десктопе — максимум. Колонка справа — десктопное значение.</p>
+        </div>
+
+        <div class="scale-row">
+            <div class="scale-num">144 <span class="meta-gray">PX</span></div>
+            <div class="scale-sample" style="font-size:90px;font-weight:900;letter-spacing:-2px;line-height:0.9;text-transform:uppercase;">SOMETHING</div>
+            <div class="scale-meta"><b>DISPLAY / HERO</b><br>main-title · 9rem · 900 · -2px</div>
+        </div>
+        <div class="scale-row">
+            <div class="scale-num">64 <span class="meta-gray">PX</span></div>
+            <div class="scale-sample" style="font-size:64px;font-weight:700;letter-spacing:-2px;line-height:1;text-transform:uppercase;">FIELD CASES</div>
+            <div class="scale-meta"><b>H2 / SECTION</b><br>cases-title · evidence-title · access-title</div>
+        </div>
+        <div class="scale-row">
+            <div class="scale-num">51 <span class="meta-gray">PX</span></div>
+            <div class="scale-sample" style="font-size:51px;font-weight:700;letter-spacing:-1.5px;line-height:1.05;color:#d1d1d1;">Reality is fragile.</div>
+            <div class="scale-meta"><b>QUOTE / LORE</b><br>lore-text · 3.2rem · 700 · -1.5px</div>
+        </div>
+        <div class="scale-row">
+            <div class="scale-num">42 <span class="meta-gray">PX</span></div>
+            <div class="scale-sample" style="font-size:42px;font-weight:800;letter-spacing:-2.5px;line-height:1;text-transform:uppercase;">CASE 01: ANALYST</div>
+            <div class="scale-meta"><b>CARD TITLE</b><br>case-name · 42px · 800 · -2.5px</div>
+        </div>
+        <div class="scale-row">
+            <div class="scale-num">38 <span class="meta-gray">PX</span></div>
+            <div class="scale-sample" style="font-size:38px;font-weight:600;letter-spacing:-1.5px;line-height:1;text-transform:uppercase;">LEVEL 2 INCLUDES</div>
+            <div class="scale-meta"><b>FORM TITLE</b><br>access-card-title · 38px · 600</div>
+        </div>
+        <div class="scale-row">
+            <div class="scale-num">32 <span class="meta-gray">PX</span></div>
+            <div class="scale-sample" style="display:inline-flex;align-items:center;justify-content:center;width:212px;height:42px;padding:0 22px;font-size:12px;font-weight:900;letter-spacing:0.5px;line-height:1;text-transform:uppercase;border:1px solid #555;">LOAD MORE DATA</div>
+            <div class="scale-meta"><b>COMPACT CTA</b><br>btn-load-more · 212x42 · 12px · 900</div>
+        </div>
+        <div class="scale-row">
+            <div class="scale-num">26 <span class="meta-gray">PX</span></div>
+            <div class="scale-sample" style="display:inline-flex;align-items:center;justify-content:center;width:212px;height:42px;padding:0 22px;font-family:'Roboto Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;border:1px solid #555;">THE ANALYST</div>
+            <div class="scale-meta"><b>FILTER BUTTON</b><br>evidence-filter · 212x42 · 12px · 700 mono</div>
+        </div>
+        <div class="scale-row">
+            <div class="scale-num">22 <span class="meta-gray">PX</span></div>
+            <div class="scale-sample" style="font-size:22px;color:#aaa;letter-spacing:0.5px;">TIKTOK / YOUTUBE / STEAM</div>
+            <div class="scale-meta"><b>FOOTER LINKS</b><br>footer-links · 22px · 400 · #aaa</div>
+        </div>
+        <div class="scale-row">
+            <div class="scale-num">20 <span class="meta-gray">PX</span></div>
+            <div class="scale-sample" style="font-size:20px;font-weight:600;letter-spacing:1px;text-transform:uppercase;">© 2026 FEIGIN</div>
+            <div class="scale-meta"><b>COPYRIGHT</b><br>copyright · 20px · 600 · +1px</div>
+        </div>
+        <div class="scale-row">
+            <div class="scale-num">18 <span class="meta-gray">PX</span></div>
+            <div class="scale-sample" style="font-size:18px;color:#999;font-weight:600;letter-spacing:-0.2px;">A graveyard shift. A signal that shouldn't exist.</div>
+            <div class="scale-meta"><b>BODY / DESC</b><br>case-desc · access-list li · 18px · 600</div>
+        </div>
+        <div class="scale-row">
+            <div class="scale-num">15 <span class="meta-gray">PX</span></div>
+            <div class="scale-sample" style="font-family:'Roboto Mono',monospace;font-size:15px;color:#777;">[ ABERRATION ] is a fictional universe.</div>
+            <div class="scale-meta"><b>LEGAL / META</b><br>legal-text · evidence-meta · 15px · 500</div>
+        </div>
+        <div class="scale-row">
+            <div class="scale-num">14 <span class="meta-gray">PX</span></div>
+            <div class="scale-sample" style="font-size:14px;font-weight:700;letter-spacing:-0.2px;text-transform:uppercase;">REQUEST CLEARANCE</div>
+            <div class="scale-meta"><b>FORM / CTA</b><br>access-input height 42 · access-submit 212x42</div>
+        </div>
+        <div class="scale-row">
+            <div class="scale-num">13 <span class="meta-gray">PX</span></div>
+            <div class="scale-sample" style="font-family:'Roboto Mono',monospace;font-size:13px;font-weight:700;">[ DEMO — JUNE 2026 ] PSYCHOLOGICAL HORROR</div>
+            <div class="scale-meta"><b>TECH META</b><br>case-meta · 13px · 700 mono</div>
+        </div>
+        <div class="scale-row">
+            <div class="scale-num">12 <span class="meta-gray">PX</span></div>
+            <div class="scale-sample" style="font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;">WORKS / ARCHIVE / ABOUT / CLEARANCE</div>
+            <div class="scale-meta"><b>NAV / SMALL CTA</b><br>nav-menu · btn-clearance · btn-contact</div>
+        </div>
+        <div class="scale-row">
+            <div class="scale-num">11 <span class="meta-gray">PX</span></div>
+            <div class="scale-sample" style="font-family:'Roboto Mono',monospace;font-size:11px;font-weight:500;color:#888;letter-spacing:0.5px;text-transform:uppercase;">CAUTION: PROCEED AT YOUR OWN RISK</div>
+            <div class="scale-meta"><b>CAPTION</b><br>access-caution · 11px · 500 mono · #888</div>
+        </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- 03 / WEIGHTS -->
+    <section class="ds-section">
+        <div class="ds-section-header">
+            <div class="ds-section-meta">[ 03 / WEIGHTS ]</div>
+            <h2 class="ds-section-title">Веса</h2>
+            <p class="ds-section-sub">Чем крупнее текст — тем тяжелее вес. Тонкие веса (300–400) — только для footer и атмосферных подписей.</p>
+        </div>
+
+        <div class="weight-row">
+            <div class="weight-num">900</div>
+            <div class="weight-sample" style="font-weight:900;">Black — SOMETHING IS WRONG</div>
+            <div class="weight-use">Hero (main-title), главные CTA — btn-clearance, btn-contact.</div>
+        </div>
+        <div class="weight-row">
+            <div class="weight-num">800</div>
+            <div class="weight-sample" style="font-weight:800;">ExtraBold — CASE 01: ANALYST</div>
+            <div class="weight-use">case-name, btn-steam, access-submit.</div>
+        </div>
+        <div class="weight-row">
+            <div class="weight-num">700</div>
+            <div class="weight-sample" style="font-weight:700;">Bold — FIELD CASES / EVIDENCE</div>
+            <div class="weight-use">Section titles, evidence-name, lore-text, nav-menu, фильтры.</div>
+        </div>
+        <div class="weight-row">
+            <div class="weight-num">600</div>
+            <div class="weight-sample" style="font-weight:600;">SemiBold — описательные заголовки</div>
+            <div class="weight-use">cases-subtitle, case-desc, access-warning, access-card-title, copyright.</div>
+        </div>
+        <div class="weight-row">
+            <div class="weight-num">500</div>
+            <div class="weight-sample" style="font-weight:500;">Medium — техтексты</div>
+            <div class="weight-use">meta-gray, evidence-subtitle, evidence-meta, legal-text, access-caution.</div>
+        </div>
+        <div class="weight-row">
+            <div class="weight-num">400</div>
+            <div class="weight-sample" style="font-weight:400;">Regular — мелкие подписи</div>
+            <div class="weight-use">lore-source, footer-links.</div>
+        </div>
+        <div class="weight-row">
+            <div class="weight-num">300</div>
+            <div class="weight-sample" style="font-weight:300;">Light — атмосферные тексты</div>
+            <div class="weight-use">anthology-text — единственное место.</div>
+        </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- 04 / COLORS -->
+    <section class="ds-section">
+        <div class="ds-section-header">
+            <div class="ds-section-meta">[ 04 / COLORS ]</div>
+            <h2 class="ds-section-title">Цвета</h2>
+            <p class="ds-section-sub">Чёрный фон, белый текст, серая иерархия для понижения важности, красный — единственный акцент.</p>
+        </div>
+
+        <div class="swatches">
+            <div class="swatch">
+                <div class="swatch-color" style="background:#000;border:1px solid #111;"></div>
+                <div class="swatch-meta"><span class="meta-gray">[ BG ]</span> #000000</div>
+                <div class="swatch-name">Background</div>
+                <div class="swatch-use">Body, секции, footer.</div>
+            </div>
+            <div class="swatch">
+                <div class="swatch-color" style="background:#050505;border:1px solid #111;"></div>
+                <div class="swatch-meta"><span class="meta-gray">[ BG ]</span> #050505</div>
+                <div class="swatch-name">Card BG</div>
+                <div class="swatch-use">access-card — непрозрачный.</div>
+            </div>
+            <div class="swatch">
+                <div class="swatch-color" style="background:#080808;border:1px solid #111;"></div>
+                <div class="swatch-meta"><span class="meta-gray">[ BG ]</span> #080808</div>
+                <div class="swatch-name">Image Slot</div>
+                <div class="swatch-use">case-image, aberration-image-box.</div>
+            </div>
+            <div class="swatch">
+                <div class="swatch-color" style="background:#111;border:1px solid #111;"></div>
+                <div class="swatch-meta"><span class="meta-gray">[ BG ]</span> #111111</div>
+                <div class="swatch-name">Evidence BG</div>
+                <div class="swatch-use">evidence-image.</div>
+            </div>
+            <div class="swatch">
+                <div class="swatch-color" style="background:#fff;"></div>
+                <div class="swatch-meta"><span class="meta-gray">[ TEXT ]</span> #FFFFFF</div>
+                <div class="swatch-name">Primary</div>
+                <div class="swatch-use">Заголовки, главные кнопки.</div>
+            </div>
+            <div class="swatch">
+                <div class="swatch-color" style="background:#d1d1d1;"></div>
+                <div class="swatch-meta"><span class="meta-gray">[ TEXT ]</span> #D1D1D1</div>
+                <div class="swatch-name">Lore</div>
+                <div class="swatch-use">lore-text — приглушённый белый.</div>
+            </div>
+            <div class="swatch">
+                <div class="swatch-color" style="background:#aaa;"></div>
+                <div class="swatch-meta"><span class="meta-gray">[ TEXT ]</span> #AAAAAA</div>
+                <div class="swatch-name">Footer</div>
+                <div class="swatch-use">footer-links.</div>
+            </div>
+            <div class="swatch">
+                <div class="swatch-color" style="background:#999;"></div>
+                <div class="swatch-meta"><span class="meta-gray">[ TEXT ]</span> #999999</div>
+                <div class="swatch-name">Body Gray</div>
+                <div class="swatch-use">case-desc.</div>
+            </div>
+            <div class="swatch">
+                <div class="swatch-color" style="background:#888;"></div>
+                <div class="swatch-meta"><span class="meta-gray">[ TEXT ]</span> #888888</div>
+                <div class="swatch-name">Subtitle</div>
+                <div class="swatch-use">subtitles, meta-gray, anthology-text.</div>
+            </div>
+            <div class="swatch">
+                <div class="swatch-color" style="background:#777;"></div>
+                <div class="swatch-meta"><span class="meta-gray">[ TEXT ]</span> #777777</div>
+                <div class="swatch-name">Legal</div>
+                <div class="swatch-use">legal-text.</div>
+            </div>
+            <div class="swatch">
+                <div class="swatch-color" style="background:#555;"></div>
+                <div class="swatch-meta"><span class="meta-gray">[ TEXT ]</span> #555555</div>
+                <div class="swatch-name">Filter Idle</div>
+                <div class="swatch-use">evidence-filter, separators.</div>
+            </div>
+            <div class="swatch">
+                <div class="swatch-color" style="background:#ff4444;"></div>
+                <div class="swatch-meta"><span class="meta-gray">[ ACCENT ]</span> #FF4444</div>
+                <div class="swatch-name">Warning Red</div>
+                <div class="swatch-use">access-warning — единственный цветной акцент.</div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- 05 / RULES -->
+    <section class="ds-section">
+        <div class="ds-section-header">
+            <div class="ds-section-meta">[ 05 / LOCKED RULES ]</div>
+            <h2 class="ds-section-title">Правила</h2>
+            <p class="ds-section-sub">Эти правила не подлежат изменению. Любая новая страница FEIGIN должна им следовать.</p>
+        </div>
+
+        <div class="rules-grid">
+            <div class="rule-block">
+                <div class="rule-tag"><span class="meta-gray">[ DO ]</span> ШРИФТЫ</div>
+                <div class="rule-text">Только <code>Inter</code>, <code>Roboto Mono</code> и <code>Panchang 900</code>. Любой другой шрифт — нарушение системы.</div>
+            </div>
+            <div class="rule-block">
+                <div class="rule-tag"><span class="meta-gray">[ DO ]</span> ЦВЕТА</div>
+                <div class="rule-text">Только палитра из раздела 04. Серая иерархия для понижения важности. Красный <span class="red">#ff4444</span> — единственный акцент.</div>
+            </div>
+            <div class="rule-block">
+                <div class="rule-tag"><span class="meta-gray">[ DO ]</span> CLAMP() ДЛЯ ЗАГОЛОВКОВ</div>
+                <div class="rule-text">Все hero и section-titles — через <code>clamp(min, vw, max)</code>. Это убирает нужду в десятке media-queries.</div>
+            </div>
+            <div class="rule-block">
+                <div class="rule-tag"><span class="meta-gray">[ DO ]</span> ПЕРЕИСПОЛЬЗОВАНИЕ</div>
+                <div class="rule-text">Новый контент = новые слова в существующих компонентах. Не изобретать новые рамки, штампы, плашки.</div>
+            </div>
+            <div class="rule-block dont">
+                <div class="rule-tag"><span class="meta-gray">[ DON'T ]</span> НЕ СМЕШИВАТЬ ШРИФТЫ</div>
+                <div class="rule-text">Mono — только tech. Inter — только body и заголовки. Panchang — только логотип ABERRATION. Никогда не наоборот.</div>
+            </div>
+            <div class="rule-block dont">
+                <div class="rule-tag"><span class="meta-gray">[ DON'T ]</span> НЕ ВВОДИТЬ ЦВЕТА</div>
+                <div class="rule-text">Никаких синих, зелёных, жёлтых, фиолетовых. Никаких новых градаций серого помимо перечисленных.</div>
+            </div>
+            <div class="rule-block dont">
+                <div class="rule-tag"><span class="meta-gray">[ DON'T ]</span> НЕ POSITIVE TRACKING НА BODY</div>
+                <div class="rule-text">Положительный letter-spacing — только для UPPERCASE мелких текстов (≤16px). На обычном body — никогда.</div>
+            </div>
+            <div class="rule-block dont">
+                <div class="rule-tag"><span class="meta-gray">[ DON'T ]</span> НЕ ТОНКИЕ ЗАГОЛОВКИ</div>
+                <div class="rule-text">Section titles — минимум вес 700. Тонкие веса (300–400) разрешены только для footer-links и anthology-text.</div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- 06 / BREAKPOINTS -->
+    <section class="ds-section">
+        <div class="ds-section-header">
+            <div class="ds-section-meta">[ 06 / BREAKPOINTS ]</div>
+            <h2 class="ds-section-title">Адаптив</h2>
+            <p class="ds-section-sub">Mobile-first. Размеры через clamp() — media-queries только для смены layout.</p>
+        </div>
+
+        <div class="bp-row">
+            <div class="bp-cls">DESKTOP (DEFAULT)</div>
+            <div class="bp-w">≥ 1025px</div>
+            <div class="bp-d">Полный layout: 2-колоночные cases, 3-колоночный evidence-grid с masonry-смещением.</div>
+        </div>
+        <div class="bp-row">
+            <div class="bp-cls">@media (max-width: 1024px)</div>
+            <div class="bp-w">≤ 1024px</div>
+            <div class="bp-d">Tablet: уменьшен padding header и секций. evidence-grid ↓ 2 колонки.</div>
+        </div>
+        <div class="bp-row">
+            <div class="bp-cls">@media (max-width: 991px)</div>
+            <div class="bp-w">≤ 991px</div>
+            <div class="bp-d">evidence-grid: 2 колонки с masonry-смещением 80px.</div>
+        </div>
+        <div class="bp-row">
+            <div class="bp-cls">@media (max-width: 768px)</div>
+            <div class="bp-w">≤ 768px</div>
+            <div class="bp-d">Mobile: header ↓ column, все grid ↓ 1 колонка, форма clearance ↓ column, печать ABERRATION на весь экран.</div>
+        </div>
+        <div class="bp-row">
+            <div class="bp-cls">@media (max-width: 420px)</div>
+            <div class="bp-w">≤ 420px</div>
+            <div class="bp-d">Small phones: уменьшены main-title, lore-text, access-card-title для безопасного fit.</div>
+        </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- 07 / COMPONENT REFERENCE -->
+    <section class="ds-section">
+        <div class="ds-section-header">
+            <div class="ds-section-meta">[ 07 / COMPONENTS ]</div>
+            <h2 class="ds-section-title">Компоненты</h2>
+            <p class="ds-section-sub">Полный мапинг: класс ↓ размер · вес ↓ шрифт ↓ назначение.</p>
+        </div>
+
+        <table class="ds-table">
+            <thead>
+                <tr>
+                    <th>CLASS</th>
+                    <th>SIZE · WEIGHT</th>
+                    <th>FONT</th>
+                    <th>USE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="cls">.main-title</td><td class="num">144 · 900</td><td class="num">INTER</td><td class="desc">Hero — display-заголовок</td></tr>
+                <tr><td class="cls">.cases-title<br>.evidence-title<br>.access-title</td><td class="num">64 · 700</td><td class="num">INTER</td><td class="desc">H2 — заголовки секций</td></tr>
+                <tr><td class="cls">.lore-text</td><td class="num">51 · 700</td><td class="num">INTER</td><td class="desc">Цитата лора · #d1d1d1</td></tr>
+                <tr><td class="cls">.evidence-name</td><td class="num">55 · 700</td><td class="num">INTER</td><td class="desc">Название FILE_XX</td></tr>
+                <tr><td class="cls">.case-name</td><td class="num">42 · 800</td><td class="num">INTER</td><td class="desc">Название кейса</td></tr>
+                <tr><td class="cls">.access-card-title</td><td class="num">38 · 600</td><td class="num">INTER</td><td class="desc">Заголовок формы</td></tr>
+                <tr><td class="cls">.btn-load-more</td><td class="num">12 · 900 · 212x42</td><td class="num">INTER</td><td class="desc">Компактная CTA</td></tr>
+                <tr><td class="cls">.cases-subtitle<br>.evidence-subtitle<br>.access-warning</td><td class="num">29-32 · 500-600</td><td class="num">INTER</td><td class="desc">Подзаголовки · warning — красный</td></tr>
+                <tr><td class="cls">.evidence-filter</td><td class="num">12 · 700 · 212x42</td><td class="num">MONO</td><td class="desc">Фильтр-кнопка</td></tr>
+                <tr><td class="cls">.anthology-text</td><td class="num">29 · 300</td><td class="num">INTER</td><td class="desc">Light под печатью ABERRATION</td></tr>
+                <tr><td class="cls">.footer-links</td><td class="num">22 · 400</td><td class="num">INTER</td><td class="desc">Соцсети · #aaa</td></tr>
+                <tr><td class="cls">.copyright</td><td class="num">20 · 600</td><td class="num">INTER</td><td class="desc">© 2026 FEIGIN</td></tr>
+                <tr><td class="cls">.case-desc<br>.access-list li</td><td class="num">18 · 600</td><td class="num">INTER</td><td class="desc">Body-описания</td></tr>
+                <tr><td class="cls">.legal-text<br>.evidence-meta</td><td class="num">15 · 500</td><td class="num">MONO</td><td class="desc">Legal · мета</td></tr>
+                <tr><td class="cls">.btn-steam<br>.access-input<br>.access-submit</td><td class="num">12-14 · 42h</td><td class="num">INTER</td><td class="desc">Form · компактные CTA</td></tr>
+                <tr><td class="cls">.case-meta</td><td class="num">13 · 700</td><td class="num">MONO</td><td class="desc">Tech-тег кейса</td></tr>
+                <tr><td class="cls">.nav-menu<br>.btn-clearance<br>.btn-contact</td><td class="num">12 · 700-900</td><td class="num">INTER</td><td class="desc">Nav · мелкие CTA</td></tr>
+                <tr><td class="cls">.access-caution</td><td class="num">11 · 500</td><td class="num">MONO</td><td class="desc">Caution-сноска · #888</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- FOOTER (same as site) -->
+    <footer class="footer-section">
+        <div class="footer-logo">
+            <img src="assets/brand/feigin-logo.png" alt="FEIGIN ENTERTAINMENT">
+        </div>
+        <div class="footer-links">
+            <a href="#">TIKTOK</a>/ <a href="#">YOUTUBE</a> / <a href="#">INSTAGRAM</a> / <a href="#">TWITTER</a> / <a href="https://store.steampowered.com/app/4489940/ABERRATION_THE_ANALYST/" target="_blank" rel="noopener noreferrer">STEAM</a>
+        </div>
+        <div class="footer-contact">
+            <a href="#" class="btn-contact">CONTACT ↓</a>
+        </div>
+        <div class="footer-bottom">
+            <p class="copyright">&copy; 2026 FEIGIN ENTERTAINMENT &middot; <a href="#">PRIVACY</a></p>
+            <p class="legal-text">[ ABERRATION ] is a fictional universe. Any resemblance to actual classified material is intentional.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.8s ease-in-out';
+            requestAnimationFrame(() => { document.body.style.opacity = '1'; });
+
+            document.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function (e) {
+                    const isInternal = this.hostname === window.location.hostname;
+                    const isSamePath = this.pathname === window.location.pathname;
+                    const isBlank = this.target === '_blank';
+                    if (isInternal && !isSamePath && !isBlank) {
+                        e.preventDefault();
+                        const target = this.href;
+                        document.body.style.opacity = '0';
+                        setTimeout(() => { window.location.href = target; }, 800);
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
+

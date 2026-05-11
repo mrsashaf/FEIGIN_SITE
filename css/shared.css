@@ -1,0 +1,395 @@
+/* =============================================
+   SHARED STYLES — used by ALL pages
+   (reset, header, footer, buttons, transitions)
+   ============================================= */
+
+/* --- RESET --- */
+html { scroll-behavior: smooth; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    --case-button-width: max-content;
+    --case-button-height: 42px;
+    --case-button-padding-x: 32px;
+    --site-gray-unified: #6f6f6f;
+}
+
+/* --- HEADER --- */
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+}
+
+.header-logo {
+    height: 48px;
+    width: auto;
+}
+
+.nav-menu {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    row-gap: 8px;
+}
+
+.nav-menu a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+
+.nav-menu a:hover {
+    color: #ccc;
+}
+
+.nav-censored {
+    color: var(--site-gray-unified) !important;
+    transition: color 0.3s ease !important;
+}
+
+.nav-censored:hover {
+    color: #ff4a4a !important;
+}
+
+.nav-separator {
+    margin: 0 10px;
+    color: var(--site-gray-unified);
+}
+
+/* --- BUTTONS (shared pillar) --- */
+.btn-clearance {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    color: #000;
+    text-decoration: none;
+    width: var(--case-button-width);
+    height: var(--case-button-height);
+    padding: 0 var(--case-button-padding-x);
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: background-color 0.2s;
+}
+
+.btn-clearance:hover {
+    background-color: #ccc;
+}
+
+.btn-clearance--dark {
+    background-color: #000;
+    color: #fff;
+}
+
+.btn-clearance--dark:hover {
+    background-color: #222;
+    color: #fff;
+}
+
+.btn-steam {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background-color: #fff;
+    color: #000;
+    text-decoration: none;
+    width: var(--case-button-width);
+    height: var(--case-button-height);
+    padding: 0 var(--case-button-padding-x);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    align-self: flex-start;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-steam:hover {
+    background-color: #ccc;
+}
+
+.btn-steam--outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background-color: transparent;
+    color: #fff;
+    text-decoration: none;
+    width: var(--case-button-width);
+    height: var(--case-button-height);
+    padding: 0 var(--case-button-padding-x);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    border: 2px solid #fff;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-steam--outline:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.btn-steam--gray {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: #555;
+    text-decoration: none;
+    width: var(--case-button-width);
+    height: var(--case-button-height);
+    padding: 0 var(--case-button-padding-x);
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    border: 2px solid #555;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.btn-steam--gray:hover {
+    border-color: #fff;
+    color: #fff;
+}
+
+.case-buttons {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.btn-arrow {
+    display: inline-block;
+    margin-left: 6px;
+    line-height: 1.1;
+    font-size: 1em;
+    font-weight: inherit;
+    vertical-align: middle;
+    transform: none;
+}
+
+/* --- KEEP WATCHING --- */
+.keep-watching {
+    max-width: 1500px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 120px 20px 80px;
+}
+
+.keep-watching-title {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 72.5px);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.07em;
+    line-height: 0.912;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.keep-watching-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1.4rem, 3.6vw, 52.43px);
+    font-weight: 600;
+    color: #888;
+    letter-spacing: -0.07em;
+    line-height: 0.912;
+}
+
+/* --- FOOTER --- */
+.footer-section {
+    background-color: #000;
+    padding: 56px 20px 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.footer-logo {
+    margin-bottom: 44px;
+}
+
+.footer-logo img {
+    width: clamp(520px, 62vw, 760px);
+    max-width: none;
+    height: auto;
+}
+
+.footer-links {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(18px, 2.4vw, 26px);
+    color: #aaa;
+    margin-bottom: 82px;
+    font-weight: 400;
+    letter-spacing: -0.07em;
+    line-height: 0.912;
+}
+
+.footer-links a {
+    color: #aaa;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #fff;
+}
+
+.footer-contact {
+    margin-bottom: 112px;
+}
+
+.btn-contact {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background-color: #fff;
+    color: #000;
+    width: var(--case-button-width);
+    height: var(--case-button-height);
+    padding: 0 var(--case-button-padding-x);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+}
+
+.btn-contact:hover {
+    background-color: #ccc;
+}
+
+.copyright {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    line-height: 0.912;
+    margin-bottom: 20px;
+}
+
+.copyright a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.legal-text {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 15px;
+    font-weight: 500;
+    color: #9c9c9c;
+    letter-spacing: 0px;
+}
+
+/* =============================================
+   RESPONSIVE — SHARED COMPONENTS
+   ============================================= */
+
+/* --- TABLET --- */
+@media (max-width: 1024px) {
+    .header { padding: 28px 30px; }
+}
+
+/* --- MOBILE --- */
+@media (max-width: 768px) {
+    /* HEADER */
+    .header {
+        flex-direction: column;
+        align-items: center;
+        padding: 24px 20px;
+        gap: 16px;
+    }
+    .header-logo { height: 44px; }
+    .nav-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px 14px;
+        font-size: 11px;
+        letter-spacing: 0.6px;
+        line-height: 1.4;
+        text-align: center;
+    }
+    .nav-separator { display: none; }
+
+    /* KEEP WATCHING */
+    .keep-watching { padding: 50px 20px; }
+    .keep-watching-title { font-size: clamp(2rem, 9vw, 2.8rem); }
+    .keep-watching-sub { font-size: clamp(1rem, 4vw, 1.4rem); }
+
+    /* FOOTER */
+    .footer-section { padding: 60px 20px 30px; }
+    .footer-logo { margin-bottom: 24px; }
+    .footer-logo img { max-width: clamp(220px, 74vw, 320px); }
+    .footer-links {
+        font-size: 14px;
+        margin-bottom: 50px;
+        line-height: 1.8;
+        max-width: 320px;
+    }
+    .footer-contact { margin-bottom: 60px; }
+    .btn-contact {
+        font-size: 11px;
+    }
+    .copyright {
+        font-size: 13px;
+        letter-spacing: 0.5px;
+        margin-bottom: 12px;
+    }
+    .legal-text {
+        font-size: 11px;
+        max-width: 320px;
+        line-height: 1.5;
+        margin: 0 auto;
+    }
+}

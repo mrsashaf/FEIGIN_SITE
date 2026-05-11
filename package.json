@@ -1,0 +1,17 @@
+{
+  "name": "feigin-site",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "FEIGIN ENTERTAINMENT site",
+  "main": "index.html",
+  "scripts": {
+    "dev": "echo 'Starting...'"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.38.4",
+    "resend": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
