@@ -132,6 +132,18 @@
             padding: 0 20px 40px;
         }
 
+        .aberration-section::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 40%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0));
+            z-index: 1;
+            pointer-events: none;
+        }
+
         .aberration-image-box {
             position: absolute;
             top: 0;
@@ -147,8 +159,8 @@
         }
 
         video.aberration-image-box {
-            opacity: 0.35;
-            filter: brightness(0.55) contrast(1.05);
+            opacity: 0.58;
+            filter: brightness(0.72) contrast(1.05);
         }
 
         .aberration-logo-overlay {
@@ -167,8 +179,9 @@
             font-size: clamp(1.2rem, 2vw, 1.8rem);
             font-weight: 300;
             line-height: 1.2;
-            color: #888888;
+            color: #d0d0d0;
             letter-spacing: -0.5px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
         }
 
         /* -------------------------------------
@@ -989,16 +1002,17 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
             object-position: center;
             z-index: 1;
-            filter: brightness(0.6);
+            filter: brightness(0.55) contrast(1.05);
+            opacity: 0.38;
         }
 
         .access-card {
             position: relative;
             z-index: 2;
-            background-color: #050505;
+            background-color: rgba(5, 5, 5, 0.62);
             border: 2px solid #fff;
             padding: 30px 32px 24px;
             max-width: 520px;
@@ -1039,20 +1053,25 @@
             width: 100%;
             height: var(--case-button-height);
             background: transparent;
-            border: 2px solid #fff;
+            border: 4px solid #fff;
             color: #fff;
-            padding: 0 14px;
+            padding: 0 12px;
             font-family: 'Inter', sans-serif;
-            font-size: 12px;
-            font-weight: 700;
+            font-size: 13px;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: -0.2px;
-            line-height: 1;
+            letter-spacing: 0;
+            line-height: normal;
             outline: none;
+            -webkit-appearance: none;
+            appearance: none;
         }
 
         .access-input::placeholder {
-            color: #fff;
+            color: #bdbdbd;
+            opacity: 1;
+            text-transform: uppercase;
+            letter-spacing: -0.2px;
         }
         .access-submit {
             display: inline-flex;
@@ -1065,10 +1084,10 @@
             height: var(--case-button-height);
             padding: 0 var(--case-button-padding-x);
             font-family: 'Inter', sans-serif;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: -0.2px;
+            letter-spacing: -0.4px;
             line-height: 1;
             cursor: pointer;
             transition: background 0.3s, color 0.3s;
@@ -1405,7 +1424,9 @@
                 z-index: 2;
                 font-size: clamp(1rem, 3.8vw, 1.3rem);
                 line-height: 1.5;
-                padding-bottom: 4vh;
+                padding-bottom: 8vh;
+                color: #e2e2e2;
+                text-shadow: 0 3px 12px rgba(0, 0, 0, 0.95);
             }
 
             /* CASES */
@@ -1521,7 +1542,7 @@
         .evidence-card[data-category="comfort"] .evidence-meta,
         .evidence-card[data-category="comfort"] .evidence-name {
             color: #777 !important;
-            font-size: 0.5em;
+            font-size: inherit;
         }
             .load-more-container {
                 text-align: center;
@@ -1546,14 +1567,6 @@
                 letter-spacing: -0.07em;
                 line-height: 0.912;
             }
-            .access-section {
-                padding: 60px 16px 80px;
-                min-height: auto;
-            }
-            .access-card {
-                padding: 32px 22px 28px;
-                max-width: 100%;
-            }
             .access-modal-card {
                 padding: 32px 22px 28px;
                 max-width: 520px;
@@ -1571,38 +1584,6 @@
                 letter-spacing: -1px;
                 margin-bottom: 26px;
             }
-            .access-list {
-                margin-bottom: 32px;
-                padding-left: 18px;
-            }
-            .access-list li {
-                font-size: 14px;
-                line-height: 1.35;
-                margin-bottom: 8px;
-            }
-            .access-form {
-                flex-direction: row;
-                gap: 12px;
-                margin-bottom: 32px;
-            }
-            .access-input {
-                width: var(--case-button-width);
-                min-width: var(--case-button-width);
-                max-width: var(--case-button-width);
-                height: var(--case-button-height);
-                padding: 0 14px;
-            }
-            .access-submit {
-                width: var(--case-button-width);
-                min-width: 0;
-                height: var(--case-button-height);
-                padding: 0 var(--case-button-padding-x);
-            }
-            .access-caution {
-                font-size: 10px;
-                letter-spacing: 0.3px;
-                line-height: 1.5;
-            }
             .term-line, .term-load-bar {
                 font-size: 14px;
             }
@@ -1614,6 +1595,7 @@
             }
 
             /* FOOTER */
+        }
         }
 
         /* ═══════════════════════════════════
@@ -1638,3 +1620,359 @@
 
 
 
+        /* -------------------------------------
+           MOBILE HOTFIXES (2026-05-11)
+           ------------------------------------- */
+        @media (max-width: 1024px) {
+            .case-name { white-space: normal; }
+            .case-meta { white-space: normal; }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                --case-button-width: max-content;
+                --case-button-height: 44px;
+                --case-button-padding-x: 16px;
+            }
+
+            .hero-section {
+                min-height: 92vh;
+                padding: 150px 16px 56px;
+            }
+
+            .hero-content {
+                width: min(100%, 420px);
+            }
+
+            .main-title {
+                font-size: clamp(2.4rem, 13vw, 3.6rem);
+                letter-spacing: -1px;
+                white-space: nowrap;
+            }
+
+            .hero-subtitle {
+                font-size: 0.95rem;
+                margin-bottom: 24px;
+            }
+
+            .hero-buttons {
+                width: 100%;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: center;
+                gap: 10px;
+                align-items: center;
+            }
+
+            .hero-buttons .btn-clearance {
+                width: auto;
+                min-width: 0;
+                padding-left: 12px;
+                padding-right: 12px;
+                font-size: 10px;
+                justify-content: center;
+            }
+
+            .cases-section,
+            .evidence-section {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .cases-grid {
+                grid-template-columns: 1fr;
+                gap: 72px;
+            }
+
+            .case-card--featured .case-meta {
+                display: block;
+            }
+
+            .case-card--featured .case-meta-nav {
+                margin-top: 10px;
+                justify-content: flex-end;
+            }
+
+            .case-card--featured .case-image {
+                aspect-ratio: 689 / 938;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+
+            .case-name {
+                font-size: clamp(1.8rem, 10vw, 2.5rem);
+                line-height: 0.95;
+            }
+
+            .case-desc {
+                font-size: 15px;
+                line-height: 1.35;
+            }
+
+            .case-buttons {
+                flex-direction: row;
+                align-items: center;
+                gap: 10px;
+                flex-wrap: nowrap;
+            }
+
+            .case-buttons .btn-steam,
+            .case-buttons .btn-steam--outline,
+            .case-buttons .btn-steam--gray {
+                width: calc(50% - 5px);
+                min-width: 0;
+                height: 44px;
+                padding-left: 10px;
+                padding-right: 10px;
+                font-size: 12px;
+                justify-content: center;
+            }
+
+            .next-case-label {
+                padding-top: 20px;
+                margin-bottom: -6px;
+            }
+
+            .evidence-grid {
+                grid-template-columns: 1fr;
+                gap: 56px;
+            }
+
+            .evidence-filters {
+                gap: 8px;
+                justify-content: flex-start;
+            }
+
+            .evidence-filter {
+                width: auto;
+                min-height: 44px;
+                padding: 0 10px;
+            }
+
+            .filter-separator {
+                line-height: 1;
+            }
+
+            .evidence-card,
+            .evidence-card:nth-child(n) {
+                margin-top: 0 !important;
+            }
+
+            .evidence-meta {
+                font-size: 14px;
+                letter-spacing: 0.6px;
+            }
+
+            .evidence-name {
+                font-size: clamp(1.25rem, 7vw, 1.9rem);
+                line-height: 1.05;
+            }
+
+            .evidence-card[data-category="analyst"][data-access="sealed"] .evidence-meta,
+            .evidence-card[data-category="analyst"][data-access="sealed"] .evidence-name,
+            .evidence-card[data-category="comfort"] .evidence-meta,
+            .evidence-card[data-category="comfort"] .evidence-name {
+                font-size: inherit;
+            }
+
+            .btn-load-more {
+                width: max-content;
+                min-width: 200px;
+                height: 44px;
+            }
+
+            .load-more-container {
+                text-align: right;
+            }
+
+            .access-modal-buttons {
+                flex-direction: column;
+            }
+
+            .access-modal-btn {
+                width: 100%;
+                flex: 1 1 auto;
+                height: 44px;
+            }
+
+            .aberration-section {
+                min-height: 72vh;
+            }
+
+            video.aberration-image-box {
+                width: 122%;
+                height: 122%;
+                left: -11%;
+                top: -8%;
+                opacity: 0.52;
+                filter: brightness(0.68) contrast(1.06);
+                object-fit: cover;
+            }
+
+            .aberration-logo-overlay {
+                width: min(94vw, 620px);
+                margin-bottom: 12px;
+            }
+
+            .case-image--case01 {
+                background-image: url('../assets/cases/mobile/case-01-analyst-mobile.png');
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+
+            .case-image--classified {
+                aspect-ratio: 689 / 938;
+                background-color: #000;
+            }
+
+            .case-image--classified .case-image-bg {
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+
+            .case-image-bg--comfort-hero {
+                background-image: url('../assets/cases/mobile/case-02-comfort-zone-mobile.png');
+            }
+
+            .access-warning-overlay h3 {
+                font-size: clamp(28px, 8vw, 38px);
+                line-height: 0.92;
+                margin-bottom: 20px;
+            }
+
+            .access-warning-overlay p {
+                font-size: 19px;
+                line-height: 1.12;
+                max-width: 95%;
+            }
+
+            .access-warning-overlay .incard-request-btn {
+                min-height: 44px;
+                font-size: 13px;
+                padding: 0 14px;
+            }
+
+            /* Unified ACCESS mobile overrides (single source of truth) */
+            .access-section {
+                padding: 48px 16px 64px;
+                min-height: auto;
+            }
+
+            .access-bg-video {
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                object-fit: cover;
+                object-position: center;
+                filter: brightness(0.58) contrast(1.05);
+                opacity: 0.4;
+            }
+
+            .access-card {
+                width: 100%;
+                max-width: 520px;
+                padding: 26px 16px 22px;
+                background: rgba(0, 0, 0, 0.62);
+                backdrop-filter: blur(2px);
+                -webkit-backdrop-filter: blur(2px);
+            }
+
+            .access-form {
+                width: 100%;
+                margin-bottom: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+
+            .access-input,
+            .access-submit {
+                width: 100% !important;
+                min-width: 0;
+                max-width: none;
+                height: 50px;
+            }
+
+            .access-input {
+                border-width: 3px;
+                background: rgba(0, 0, 0, 0.45);
+                font-size: 15px;
+                font-weight: 700;
+                letter-spacing: 0;
+                line-height: 50px;
+                padding: 0 14px;
+            }
+
+            .access-input::placeholder {
+                color: #d8d8d8;
+                opacity: 1;
+                letter-spacing: 0;
+            }
+
+            .access-submit {
+                border-width: 2px;
+                font-size: 13px;
+                font-weight: 800;
+                letter-spacing: -0.2px;
+                white-space: nowrap;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .hero-section {
+                padding-top: 138px;
+            }
+
+            .main-title {
+                font-size: clamp(2.1rem, 11.5vw, 3rem);
+            }
+
+            .case-name {
+                font-size: clamp(1.55rem, 9.5vw, 2.15rem);
+            }
+
+            .hero-buttons {
+                gap: 8px;
+            }
+
+            .hero-buttons .btn-clearance {
+                font-size: 9px;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .case-buttons .btn-steam,
+            .case-buttons .btn-steam--outline,
+            .case-buttons .btn-steam--gray {
+                font-size: 11px;
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+
+            .case-card--featured .case-image,
+            .case-image--classified {
+                max-height: 72vh;
+            }
+        }
+
+        @media (hover: none), (pointer: coarse) {
+            .evidence-card:hover .evidence-image-bg,
+            .evidence-card:hover .evidence-image.placeholder {
+                transform: none;
+            }
+
+            .evidence-card:hover .evidence-image--video-shell .preview-video--cover {
+                filter: blur(2.4px) brightness(0.76);
+                transform: scale(1.01);
+            }
+
+            .case-card--locked:hover .case-image-bg {
+                filter: blur(5px) brightness(1) !important;
+                transform: scale(1.02);
+            }
+        }

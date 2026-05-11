@@ -5,6 +5,7 @@
 (function () {
     const case01Img = document.getElementById('case01Image');
     if (!case01Img) return;
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
     let slides = window.FEIGIN_CASE01_SLIDES || [
         'assets/cases/case-01-analyst/main-capsule.png',
@@ -12,6 +13,10 @@
         'assets/cases/case-01-analyst/gallery/02.png',
         'assets/cases/case-01-analyst/gallery/03.png'
     ];
+
+    if (isMobile) {
+        slides = ['assets/cases/mobile/case-01-analyst-mobile.png'];
+    }
     let current = 0;
     let intervalId = null;
 
@@ -56,6 +61,7 @@
     slides.forEach(src => { const img = new Image(); img.src = src; });
 
     window.addEventListener('feigin:case01-slides-ready', () => {
+        if (isMobile) return;
         if (Array.isArray(window.FEIGIN_CASE01_SLIDES) && window.FEIGIN_CASE01_SLIDES.length) {
             slides = window.FEIGIN_CASE01_SLIDES;
             current = 0;
