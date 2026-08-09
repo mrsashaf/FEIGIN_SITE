@@ -34,7 +34,10 @@
       <span class="hero__star" data-node-id="3022:378"><span class="hero__star-rot"><img src="assets/star.svg" alt=""></span></span>
     </div>
 
-    <h1 class="hero__h1" data-node-id="3016:22">HE ONLY WANTS TO MAKE YOUR LIFE EASIER</h1>
+    <!-- The visible line is rewritten by script. The screen-reader copy stays fixed on
+         the canonical headline so assistive tech is not read a mutating <h1>, and it is
+         also what search engines and a no-JS visitor get. -->
+    <h1 class="hero__h1" data-node-id="3016:22"><span class="visually-hidden">HE ONLY WANTS TO MAKE YOUR LIFE EASIER</span><span class="hero__h1-text" aria-hidden="true">HE ONLY WANTS TO MAKE YOUR LIFE EASIER</span></h1>
 
     <a class="btn btn--solid hero__btn1" href="https://store.steampowered.com/app/4894570/ABERRATION_YesJerry/" target="_blank" rel="noopener" data-node-id="3016:24"><span data-node-id="3016:26">WISHLIST ON STEAM →</span></a>
 
@@ -134,6 +137,100 @@
   fit();
   window.addEventListener('resize', fit);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+})();
+
+// The hero headline, rewritten by Jerry rather than cycled like a carousel.
+// Every phrase shares the prefix "HE ONLY WANTS", so each transition only erases back
+// to the point where the two versions diverge and retypes the tail. The last line
+// diverges earliest, so it wipes the most - which is the whole point of it.
+(function () {
+  var host = document.querySelector('.hero__h1');
+  var el = document.querySelector('.hero__h1-text');
+  if (!host || !el) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var PHRASES = [
+    'HE ONLY WANTS TO HELP YOU',
+    'HE ONLY WANTS TO MAKE YOUR LIFE EASIER',
+    'HE ONLY WANTS TO KEEP YOU SAFE',
+    'HE ONLY WANTS TO TAKE CARE OF YOU',
+    'HE ONLY WANTS YOU'
+  ];
+  var START = 1;                 // the markup already shows PHRASES[1]
+  var LAST = PHRASES.length - 1;
+
+  // Deliberate typewriter cadence: ~95-150ms a character. The jitter is what stops it
+  // reading as a machine on a timer. Erasing runs faster than typing, the way a delete
+  // key does. Tune TYPE first if it still feels off.
+  var TYPE = 95, TYPE_JITTER = 55, ERASE = 45;
+  var HOLD = 1600, HOLD_LAST = 5200, PAUSE_BEFORE_LAST = 700;
+  var GLITCH_FRAMES = 4, GLITCH_ON = 55, GLITCH_OFF = 45;
+  var GLITCH_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&*/\\<>_';
+
+  var caret = document.createElement('span');   // built here so no-JS gets clean text
+  caret.className = 'hero__h1-caret';
+  caret.setAttribute('aria-hidden', 'true');
+  el.after(caret);
+
+  var shown = PHRASES[START];
+
+  function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+  function render(s) { shown = s; el.textContent = s; }
+
+  function sharedPrefix(a, b) {
+    var n = 0;
+    while (n < a.length && n < b.length && a[n] === b[n]) n++;
+    return n;
+  }
+
+  async function eraseTo(n) {
+    host.classList.add('is-typing');
+    while (shown.length > n) { render(shown.slice(0, -1)); await sleep(ERASE); }
+    host.classList.remove('is-typing');
+  }
+
+  async function typeOut(target) {
+    host.classList.add('is-typing');
+    while (shown.length < target.length) {
+      render(target.slice(0, shown.length + 1));
+      await sleep(TYPE + Math.random() * TYPE_JITTER);
+    }
+    host.classList.remove('is-typing');
+  }
+
+  // Scrambles only the part after the shared prefix, so the line does not reflow.
+  async function glitch(text, keep) {
+    for (var f = 0; f < GLITCH_FRAMES; f++) {
+      el.textContent = text.split('').map(function (ch, i) {
+        if (i < keep || ch === ' ') return ch;
+        return Math.random() < 0.55
+          ? GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)]
+          : ch;
+      }).join('');
+      el.classList.add('is-glitching');
+      await sleep(GLITCH_ON);
+      el.classList.remove('is-glitching');
+      await sleep(GLITCH_OFF);
+    }
+    render(text);
+  }
+
+  async function run() {
+    var i = START;
+    for (;;) {
+      await sleep(i === LAST ? HOLD_LAST : HOLD);
+      var next = PHRASES[(i + 1) % PHRASES.length];
+      var keep = sharedPrefix(shown, next);
+      await eraseTo(keep);
+      if ((i + 1) % PHRASES.length === LAST) await sleep(PAUSE_BEFORE_LAST);
+      await typeOut(next);
+      i = (i + 1) % PHRASES.length;
+      if (i === LAST) await glitch(next, keep);
+    }
+  }
+
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(run);
+  else run();
 })();
 </script>
 
