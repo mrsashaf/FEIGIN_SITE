@@ -23,11 +23,11 @@
   <section class="hero" data-node-id="3015:2">
     <img class="hero__bg" src="assets/hero-bg.png" alt="" data-node-id="3022:367">
 
-    <a class="hero__logo" href="#" aria-label="FEIGIN ENTERTAINMENT" data-node-id="3016:10">
+    <a class="hero__logo" href="/" aria-label="FEIGIN ENTERTAINMENT" data-node-id="3016:10">
       <img src="assets/feigin-logo.svg" alt="FEIGIN ENTERTAINMENT">
     </a>
 
-    <nav class="hero__nav" data-node-id="3016:19"><a href="#">GAME</a>  \ <a href="#about">ABOUT</a> \ <a href="#contact">CONTACT</a></nav>
+    <nav class="hero__nav" data-node-id="3016:19"><a href="#game">GAME</a>  \ <a href="#about">ABOUT</a> \ <a href="https://www.linkedin.com/in/alexander-feigin/" target="_blank" rel="noopener">CONTACT</a></nav>
 
     <div class="hero__title" data-node-id="3022:372">
       <p class="hero__title-text" data-node-id="3022:377">Yes, jerry!</p>
@@ -36,9 +36,9 @@
 
     <h1 class="hero__h1" data-node-id="3016:22">HE ONLY WANTS TO MAKE YOUR LIFE EASIER</h1>
 
-    <a class="btn btn--solid hero__btn1" href="#" data-node-id="3016:24"><span data-node-id="3016:26">WISHLIST ON STEAM →</span></a>
+    <a class="btn btn--solid hero__btn1" href="https://store.steampowered.com/app/4894570/ABERRATION_YesJerry/" target="_blank" rel="noopener" data-node-id="3016:24"><span data-node-id="3016:26">WISHLIST ON STEAM →</span></a>
 
-    <a class="btn btn--outline hero__btn2" href="#" data-node-id="3016:27">
+    <a class="btn btn--outline hero__btn2" href="https://www.youtube.com/@FeiginGames" target="_blank" rel="noopener" data-node-id="3016:27">
       <span class="hero__btn2-label" data-node-id="3016:29">WATCH TRAILER </span>
       <span class="hero__btn2-arrow" data-node-id="3173:357"><span>→</span></span>
     </a>
@@ -47,7 +47,7 @@
   </section>
 
   <!-- ============ 02 — FEATURED EXPERIENCE  (3015:3) ============ -->
-  <section class="featured" data-node-id="3015:3">
+  <section class="featured" id="game" data-node-id="3015:3">
     <h2 class="featured__kicker" data-node-id="3017:8">CURRENT INCIDENT</h2>
     <p class="featured__sub" data-node-id="3017:9">The first public story from the ABERRATION anthology.</p>
 
@@ -66,7 +66,7 @@
       <p>A short VR psychological horror experience built around comfort, dependency and the slow loss of agency.</p>
     </div>
 
-    <a class="btn btn--solid featured__btn" href="#" data-node-id="3017:17"><span data-node-id="3017:19">WISHLIST ON STEAM →</span></a>
+    <a class="btn btn--solid featured__btn" href="https://store.steampowered.com/app/4894570/ABERRATION_YesJerry/" target="_blank" rel="noopener" data-node-id="3017:17"><span data-node-id="3017:19">WISHLIST ON STEAM →</span></a>
 
     <p class="tag featured__specs" data-node-id="3017:16">[ PC VR · PSYCHOLOGICAL HORROR · 15–20 MIN · COMING TO STEAM ]</p>
   </section>
@@ -86,7 +86,7 @@
     <p>ABERRATION is his ongoing anthology of short interactive horror stories exploring psychological and social anxieties through speculative fiction.</p>
   </div>
 
-  <a class="btn btn--solid author-btn" href="#contact" data-node-id="3174:378"><span data-node-id="3174:379">CONTACT →</span></a>
+  <a class="btn btn--solid author-btn" href="https://www.linkedin.com/in/alexander-feigin/" target="_blank" rel="noopener" data-node-id="3174:378"><span data-node-id="3174:379">CONTACT →</span></a>
 
   <!-- ============ 08 — FOOTER  (3015:9) ============ -->
   <footer class="footer" id="contact" data-node-id="3015:9">
@@ -94,19 +94,23 @@
       <img src="assets/feigin-logo.svg" alt="FEIGIN ENTERTAINMENT">
     </div>
 
+    <!-- TIKTOK, INSTAGRAM and X are plain text on purpose: no URLs were supplied for
+         them, and a dead href="#" on a live page is worse than no link. The wording
+         matches Figma either way. Wrap them in <a> once the accounts exist. -->
     <p class="footer__social" data-node-id="3019:67">
-      <a href="#">TIKTOK</a> / <a href="#">YOUTUBE</a> / <a href="#">INSTAGRAM</a> / <a href="#">X</a> / <a href="#">STEAM</a>
+      TIKTOK / <a href="https://www.youtube.com/@FeiginGames" target="_blank" rel="noopener">YOUTUBE</a> / INSTAGRAM / X / <a href="https://store.steampowered.com/app/4894570/ABERRATION_YesJerry/" target="_blank" rel="noopener">STEAM</a>
     </p>
 
     <!-- In Figma the plate (3019:68) and the label (3019:69) are two loose nodes and the
          label sits 3.5px right of the plate centre. Kept as designed. -->
-    <a class="footer__btn" href="#" aria-label="Contact">
+    <a class="footer__btn" href="https://www.linkedin.com/in/alexander-feigin/" target="_blank" rel="noopener" aria-label="Contact Alexander Feigin on LinkedIn">
       <span class="footer__btn-plate" data-node-id="3019:68"></span>
       <span class="footer__btn-label" data-node-id="3019:69">CONTACT →</span>
     </a>
 
     <p class="tag footer__teaser" data-node-id="3019:72">THE FIRST INCIDENT IS ABOUT TO BEGIN</p>
-    <p class="footer__copy" data-node-id="3019:70">© 2026 FEIGIN ENTERTAINMENT  ·  <a href="#">PRIVACY</a></p>
+    <!-- PRIVACY is plain text until a privacy page exists. -->
+    <p class="footer__copy" data-node-id="3019:70">© 2026 FEIGIN ENTERTAINMENT  ·  PRIVACY</p>
     <p class="tag footer__disclaimer" data-node-id="3019:71">[ ABERRATION ] is a fictional universe. Any resemblance to actual classified material is intentional.</p>
   </footer>
 
