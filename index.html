@@ -37,7 +37,7 @@
     <!-- The visible line is rewritten by script. The screen-reader copy stays fixed on
          the canonical headline so assistive tech is not read a mutating <h1>, and it is
          also what search engines and a no-JS visitor get. -->
-    <h1 class="hero__h1" data-node-id="3016:22"><span class="visually-hidden">HE ONLY WANTS TO MAKE YOUR LIFE EASIER</span><span class="hero__h1-text" aria-hidden="true">HE ONLY WANTS TO MAKE YOUR LIFE EASIER</span></h1>
+    <h1 class="hero__h1" data-node-id="3016:22"><span class="visually-hidden">HE ONLY WANTS TO MAKE YOUR LIFE EASIER</span><span class="hero__h1-text" aria-hidden="true">HE ONLY WANTS&#10;TO MAKE YOUR&#10;LIFE EASIER</span></h1>
 
     <a class="btn btn--solid hero__btn1" href="https://store.steampowered.com/app/4894570/ABERRATION_YesJerry/" target="_blank" rel="noopener" data-node-id="3016:24"><span data-node-id="3016:26">WISHLIST ON STEAM →</span></a>
 
@@ -149,12 +149,16 @@
   if (!host || !el) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+  // Line breaks are explicit so the headline always fills exactly three lines. Left to
+  // wrap naturally the shorter phrases collapse to two and open a hole above the
+  // buttons. The closing line is the one place the "HE ONLY WANTS" opener itself comes
+  // apart - which is also where the meaning does.
   var PHRASES = [
-    'HE ONLY WANTS TO HELP YOU',
-    'HE ONLY WANTS TO MAKE YOUR LIFE EASIER',
-    'HE ONLY WANTS TO KEEP YOU SAFE',
-    'HE ONLY WANTS TO TAKE CARE OF YOU',
-    'HE ONLY WANTS YOU'
+    'HE ONLY WANTS\nTO HELP\nYOU',
+    'HE ONLY WANTS\nTO MAKE YOUR\nLIFE EASIER',
+    'HE ONLY WANTS\nTO KEEP\nYOU SAFE',
+    'HE ONLY WANTS\nTO TAKE CARE\nOF YOU',
+    'HE ONLY\nWANTS\nYOU'
   ];
   var START = 1;                 // the markup already shows PHRASES[1]
   var LAST = PHRASES.length - 1;
@@ -164,8 +168,6 @@
   // key does. Tune TYPE first if it still feels off.
   var TYPE = 95, TYPE_JITTER = 55, ERASE = 45;
   var HOLD = 1600, HOLD_LAST = 5200, PAUSE_BEFORE_LAST = 700;
-  var GLITCH_FRAMES = 4, GLITCH_ON = 55, GLITCH_OFF = 45;
-  var GLITCH_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&*/\\<>_';
 
   var caret = document.createElement('span');   // built here so no-JS gets clean text
   caret.className = 'hero__h1-caret';
@@ -198,23 +200,6 @@
     host.classList.remove('is-typing');
   }
 
-  // Scrambles only the part after the shared prefix, so the line does not reflow.
-  async function glitch(text, keep) {
-    for (var f = 0; f < GLITCH_FRAMES; f++) {
-      el.textContent = text.split('').map(function (ch, i) {
-        if (i < keep || ch === ' ') return ch;
-        return Math.random() < 0.55
-          ? GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)]
-          : ch;
-      }).join('');
-      el.classList.add('is-glitching');
-      await sleep(GLITCH_ON);
-      el.classList.remove('is-glitching');
-      await sleep(GLITCH_OFF);
-    }
-    render(text);
-  }
-
   async function run() {
     var i = START;
     for (;;) {
@@ -225,7 +210,6 @@
       if ((i + 1) % PHRASES.length === LAST) await sleep(PAUSE_BEFORE_LAST);
       await typeOut(next);
       i = (i + 1) % PHRASES.length;
-      if (i === LAST) await glitch(next, keep);
     }
   }
 
