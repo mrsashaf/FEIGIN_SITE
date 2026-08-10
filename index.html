@@ -60,7 +60,9 @@
       <img src="assets/feature-jerry.png" alt="Jerry, a smiling yellow star, sitting on a dresser in front of a television" data-node-id="3173:362">
     </div>
 
-    <p class="tag featured__tag" data-node-id="3017:13">[ CASE 02 / COMFORT ZONE ]</p>
+    <!-- "COMFORT ZONE" was the project's old name; the case tag now carries the
+         shipping one. Figma still shows the old string on node 3017:13. -->
+    <p class="tag featured__tag" data-node-id="3017:13">[ CASE 02 / YES, JERRY ]</p>
     <h3 class="featured__h3" data-node-id="3017:14">JERRY MAKES LIFE EASIER</h3>
 
     <div class="featured__body" data-node-id="3017:15">
@@ -129,7 +131,7 @@
   // Two design canvases: Figma frame 3014:2 for desktop, 3177:394 for mobile. The
   // breakpoint here must stay in step with the one in styles.css.
   var DESKTOP = { w: 1584, h: 4464 };
-  var MOBILE = { w: 390, h: 4718 };
+  var MOBILE = { w: 390, h: 4559 };
   var narrow = window.matchMedia('(max-width: 767px)');
 
   var canvas = document.querySelector('.canvas');

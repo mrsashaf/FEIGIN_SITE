@@ -425,14 +425,16 @@ a { color: inherit; text-decoration: none; }
   background: #090a0b;
   overflow: hidden;
 }
-/* 3022:380 — 412x400 source stretched into a 727.874x737.087 box and then blown
-   up to 104.3% of that width (759.17px); the overflow is clipped by the frame. */
+/* 3184:65 — the replacement photograph. It sits on top of the old LinkedIn
+   layer in Figma, which it covers completely, so only this one is loaded:
+   586x734 at (0,-9), cropped by the frame. */
 .author-portrait img {
   position: absolute;
-  left: -95.49px;
-  top: -15.139px;
-  width: 759.17px;
-  height: 737.087px;
+  left: 0;
+  top: -9px;
+  width: 586px;
+  height: 734px;
+  object-fit: cover;
   max-width: none;
   pointer-events: none;
 }
@@ -608,27 +610,26 @@ a { color: inherit; text-decoration: none; }
 .footer__copy       { translate: 2px 1px; } /* 3019:70 */
 
 
+
 /* =============================================================================
-   MOBILE — Figma frame 3177:394 "ABERRATION — Launch Mobile Site V1" (390x4718)
+   MOBILE — Figma frame 3177:394 "ABERRATION — Launch Mobile Site V1" (390x4559)
    Same DOM, same assets: only the canvas size and the box coordinates change.
 
-   --m-gutter is the one number to touch if the side margin should differ. Figma
-   itself is inconsistent here - the hero sits at x=23 while the whole middle band
-   sits at x=0/-1/1, which would put text hard against the edge of a phone - so
-   every left-aligned element is pinned to this variable instead. Full-bleed
-   images keep their exact Figma offsets.
+   The middle band sits flush against the left edge on purpose - that is how the
+   frame is drawn and the designer confirmed it. Only the hero keeps Figma's own
+   23px inset. --m-gutter shifts everything below the hero if that ever changes.
    ============================================================================= */
 
 @media (max-width: 767px) {
-  :root { --m-gutter: 23px; }
+  :root { --m-gutter: 0px; }
 
-  .viewport { aspect-ratio: 390 / 4718; }
-  .canvas { --scale: calc(100vw / 390px); width: 390px; height: 4718px; }
+  .viewport { aspect-ratio: 390 / 4559; }
+  .canvas { --scale: calc(100vw / 390px); width: 390px; height: 4559px; }
 
-  /* The baseline nudges at the end of this file were solved against the desktop
-     render at desktop type sizes and do not transfer - mobile uses different
-     leading, so most blocks need no nudge at all here. These three were measured
-     the same way, against Figma's render of 3177:394 with a glyph mask. */
+  /* The baseline nudges earlier in this file were solved against the desktop
+     render at desktop type sizes and do not transfer - mobile leading differs,
+     so most blocks need none. These three were measured the same way, against
+     Figma's render of 3177:394 with a glyph mask. */
   .hero__nav, .featured__kicker, .featured__sub,
   .footer__social, .footer__copy { translate: none; }
   .hero__h1       { translate: 0 3px; }   /* 3177:395 */
@@ -636,25 +637,28 @@ a { color: inherit; text-decoration: none; }
   .author-bio     { translate: 0 2px; }   /* 3177:441 */
 
   /* --- hero ------------------------------------------------------------- */
-  .hero { width: 390px; height: 1000px; background: #000; }
-  .hero__bg { left: -845px; top: -124px; width: 1921.337px; height: 997px; }
+  .hero { width: 390px; height: 800px; background: #000; }
 
-  /* 3180:45 - the logo moves out of the corner and centres above the artwork */
-  .hero__logo { left: 55px; top: 18.951px; width: 281px; height: 63.047px; }
+  /* 3177:409 - a much tighter crop than desktop; object-fit stays `fill`, as
+     established for the desktop hero. */
+  .hero__bg { left: -540px; top: -38px; width: 1312px; height: 680px; }
+
+  /* 3180:45 - the logo leaves the corner and centres above the artwork */
+  .hero__logo { left: 55px; top: 18px; width: 281px; height: 63.047px; }
 
   /* Neither exists in the mobile frame */
   .hero__nav, .hero__tagline { display: none; }
 
   /* 3177:403 / 3177:407 / 3177:408 */
-  .hero__title { left: -9px; top: 526px; width: 406px; height: 98.93px; }
+  .hero__title { left: -9px; top: 367px; width: 406px; height: 98.93px; }
   .hero__title-text { top: 3.836px; width: 406px; font-size: 89.708px; letter-spacing: -0.8971px; }
   .hero__star { left: 179.34px; top: 0.04px; width: 31.877px; height: 32.016px; }
   .hero__star-rot { width: 23.157px; height: 22.063px; }
 
   /* 3177:395 - the rewriting headline keeps its explicit three lines here too */
   .hero__h1 {
-    left: var(--m-gutter);
-    top: 635.219px;
+    left: 23px;
+    top: 476.219px;
     width: 342.427px;
     height: 110.64px;
     font-size: 39.164px;
@@ -663,11 +667,11 @@ a { color: inherit; text-decoration: none; }
 
   /* 3177:396 / 3177:399 */
   .btn > span { font-size: 23.274px; letter-spacing: -1.6292px; }
-  .hero__btn1 { left: var(--m-gutter); top: 781px; width: 342px; height: 57.564px; }
+  .hero__btn1 { left: 23px; top: 622px; width: 342px; height: 57.564px; }
   .hero__btn1 > span { left: 175.48px; top: 20.32px; }
   .hero__btn2 {
-    left: var(--m-gutter);
-    top: 852.828px;
+    left: 23px;
+    top: 693.828px;
     width: 341px;
     height: 57.396px;
     border-width: 2.717px;
@@ -677,7 +681,7 @@ a { color: inherit; text-decoration: none; }
   .hero__btn2-arrow > span { font-size: 23.206px; letter-spacing: -1.6244px; }
 
   /* --- featured --------------------------------------------------------- */
-  .featured { top: 1066px; width: 390px; height: 1545px; }
+  .featured { top: 907px; width: 390px; height: 1545px; }
 
   .featured__tag { left: var(--m-gutter); top: 0; width: 260px; }
   .featured__kicker {
@@ -709,34 +713,48 @@ a { color: inherit; text-decoration: none; }
     font-size: 39.16px;
     letter-spacing: -2.7412px;
   }
-  .featured__body { left: var(--m-gutter); top: 1106px; width: 353px; height: 410px; font-size: 24px; }
+  /* 357px, not Figma's 353px, on purpose. Chrome sets this text about half a
+     percent wider than Figma does - measured 305px against 304px on one line,
+     343px against 341px on another - which over a full line is enough to push
+     the last word down and break every line after it. Four pixels of slack buys
+     back Figma's own line breaks; the box itself is invisible either way. */
+  .featured__body { left: var(--m-gutter); top: 1106px; width: 357px; height: 410px; font-size: 24px; }
   .featured__btn { left: var(--m-gutter); top: 1487px; width: 342px; height: 57.564px; }
   .featured__btn > span { left: 175.48px; top: 20.32px; }
 
   /* --- about the creator ------------------------------------------------- */
-  .author-tag { left: var(--m-gutter); top: 2771px; width: 430px; }
+  .author-tag { left: var(--m-gutter); top: 2612px; width: 430px; }
   .author-title {
     left: var(--m-gutter);
-    top: 2819px;
+    top: 2660px;
     width: 342px;
     height: 82px;
     font-size: 39.16px;
     line-height: 0.915;
     letter-spacing: -2.7412px;
   }
-  /* 3177:437 - full-bleed, so it keeps Figma's own -3px overhang */
-  .author-portrait { left: -3px; top: 2925px; width: 390px; height: 483.6px; }
-  .author-portrait img { left: -63.96px; top: -10.14px; width: 508.5px; height: 493.705px; }
-  .author-bio { left: var(--m-gutter); top: 3452px; width: 353px; height: 410px; font-size: 24px; }
+
+  /* 3184:64 - the placeholder frame is gone; the photograph is now a bare
+     full-bleed rectangle, so there is no backing colour and no inner offset. */
+  .author-portrait {
+    left: -6px;
+    top: 2753.356px;
+    width: 396.494px;
+    height: 497.288px;
+    background: none;
+  }
+  .author-portrait img { left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; }
+
+  .author-bio { left: var(--m-gutter); top: 3293px; width: 357px; height: 410px; font-size: 24px; }  /* 357 for the same reason as the body above */
   .author-bio p { line-height: 1.24; }
-  .author-btn { left: var(--m-gutter); top: 3896px; width: 342px; height: 57.564px; }
+  .author-btn { left: var(--m-gutter); top: 3737px; width: 342px; height: 57.564px; }
   .author-btn > span { left: 175.48px; top: 20.32px; }
 
   /* --- footer ------------------------------------------------------------ */
   /* The mobile frame drops the socials and the teaser, and the logo has moved to
      the top of the page. Steam, YouTube and LinkedIn all stay reachable through
      the three buttons, so nothing is lost by hiding the footer copies. */
-  .footer { top: 4226px; width: 390px; height: 492px; }
+  .footer { top: 4067px; width: 390px; height: 492px; }
   .footer__logo, .footer__social, .footer__btn, .footer__teaser { display: none; }
 
   /* 3177:464 */
