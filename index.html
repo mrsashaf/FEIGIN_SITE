@@ -21,7 +21,14 @@
 
   <!-- ============ 01 — HERO / YES, JERRY!  (3015:2) ============ -->
   <section class="hero" data-node-id="3015:2">
-    <img class="hero__bg" src="assets/hero-bg.png" alt="" data-node-id="3022:367">
+    <!-- The mobile frame crops this artwork by hand in Figma, using a fill
+         transform the API does not expose, so no combination of object-fit and
+         object-position reproduces it. Mobile is served Figma's own render of
+         node 3177:409 at 3x instead of a guess. -->
+    <picture>
+      <source media="(max-width: 767px)" srcset="assets/hero-bg-mobile.png">
+      <img class="hero__bg" src="assets/hero-bg.png" alt="" data-node-id="3022:367">
+    </picture>
 
     <a class="hero__logo" href="/" aria-label="FEIGIN ENTERTAINMENT" data-node-id="3016:10">
       <img src="assets/feigin-logo.svg" alt="FEIGIN ENTERTAINMENT">
@@ -87,7 +94,7 @@
   <h2 class="author-title" data-node-id="3019:43"><span>CREATED BY </span><span>ALEXANDER FEIGIN</span></h2>
 
   <div class="author-bio" data-node-id="3019:45">
-    <p>Alexander Feigin is a game creator and visual designer based in Israel, working across VR, narrative design and psychological horror. </p>
+    <p>Alexander Feigin is a game creator and visual designer working across VR, narrative design and psychological horror. </p>
     <p>&nbsp;</p>
     <p>ABERRATION is his ongoing anthology of short interactive horror stories exploring psychological and social anxieties through speculative fiction.</p>
   </div>
