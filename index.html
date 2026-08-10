@@ -126,17 +126,34 @@
 // carries a fallback ratio; this just makes it exact (clientWidth excludes the
 // scrollbar, 100vw does not).
 (function () {
-  var W = 1584, H = 4464;
+  // Two design canvases: Figma frame 3014:2 for desktop, 3177:394 for mobile. The
+  // breakpoint here must stay in step with the one in styles.css.
+  var DESKTOP = { w: 1584, h: 4464 };
+  var MOBILE = { w: 390, h: 4718 };
+  var narrow = window.matchMedia('(max-width: 767px)');
+
   var canvas = document.querySelector('.canvas');
   var viewport = document.querySelector('.viewport');
+
   function fit() {
-    var s = document.documentElement.clientWidth / W;
+    var d = narrow.matches ? MOBILE : DESKTOP;
+    // A zero width is reported while the document is still laying out, or in a
+    // background/hidden tab. Writing scale 0 then would collapse the page to
+    // nothing with no later event guaranteed to undo it, so sit this one out.
+    var cw = document.documentElement.clientWidth || window.innerWidth || 0;
+    if (!cw) return;
+    var s = cw / d.w;
     canvas.style.setProperty('--scale', s);
-    viewport.style.height = (H * s) + 'px';
+    viewport.style.height = (d.h * s) + 'px';
   }
+
   fit();
   window.addEventListener('resize', fit);
+  if (narrow.addEventListener) narrow.addEventListener('change', fit);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  // Catches the moment the document first gains a real width, which the resize
+  // event does not always fire for.
+  if (window.ResizeObserver) new ResizeObserver(fit).observe(document.documentElement);
 })();
 
 // The hero headline, rewritten by Jerry rather than cycled like a carousel.
