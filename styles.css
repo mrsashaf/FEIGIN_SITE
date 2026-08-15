@@ -1,6 +1,6 @@
 /* =============================================================================
    ABERRATION — Launch Site V1
-   1:1 transcription of Figma frame 3014:2 (1584 x 4464).
+   1:1 transcription of Figma frame 3014:2 (1584 x 4159).
    Every offset, size, colour and type value below is taken verbatim from the
    Figma node it is labelled with. Do not "tidy" the odd fractional numbers —
    they are what makes the page match the design.
@@ -40,7 +40,7 @@ a { color: inherit; text-decoration: none; }
 .viewport {
   position: relative;
   width: 100%;
-  aspect-ratio: 1584 / 4464;
+  aspect-ratio: 1584 / 4159;
   overflow: hidden;
 }
 
@@ -50,7 +50,7 @@ a { color: inherit; text-decoration: none; }
   top: 0;
   left: 0;
   width: 1584px;
-  height: 4464px;
+  height: 4159px;
   background: #000;
   transform-origin: 0 0;
   transform: scale(var(--scale, 1));
@@ -108,7 +108,7 @@ a { color: inherit; text-decoration: none; }
 .hero {
   position: absolute;
   left: 0;
-  top: 0;
+  top: -305px;   /* 3015:2 sits at y=-305: the frame crops the top of the artwork */
   width: 1584px;
   height: 1180px;
   background: #030303;
@@ -133,7 +133,7 @@ a { color: inherit; text-decoration: none; }
 .hero__logo {
   position: absolute;
   left: 27px;
-  top: 21px;
+  top: 333px;
   width: 252px;
   height: 56.538px;
 }
@@ -143,7 +143,7 @@ a { color: inherit; text-decoration: none; }
 .hero__nav {
   position: absolute;
   left: 1421px;
-  top: 42px;
+  top: 343px;
   width: 220px;
   height: 18px;
   transform: translateX(-50%);
@@ -161,7 +161,7 @@ a { color: inherit; text-decoration: none; }
 .hero__title {
   position: absolute;
   left: 6px;
-  top: 294px;
+  top: 498px;
   width: 843px;
   height: 205.415px;
 }
@@ -216,7 +216,7 @@ a { color: inherit; text-decoration: none; }
 .hero__h1 {
   position: absolute;
   left: 89px;
-  top: 554px;
+  top: 720px;
   width: 711px;
   height: 229.727px;
   font-family: Inter, sans-serif;
@@ -264,11 +264,11 @@ a { color: inherit; text-decoration: none; }
 .hero__h1-text { white-space: pre-line; }
 
 /* 3016:24 */
-.hero__btn1 { left: 93px; top: 877px; width: 251px; height: 42.248px; }
+.hero__btn1 { left: 93px; top: 983px; width: 251px; height: 42.248px; }
 .hero__btn1 > span { left: 128.75px; top: 14.91px; }
 
 /* 3016:27 */
-.hero__btn2 { left: 368px; top: 877px; width: 251px; height: 42.248px; }
+.hero__btn2 { left: 368px; top: 983px; width: 251px; height: 42.248px; }
 .hero__btn2-label { left: 119px; top: 14.91px; }
 
 /* 3173:357 — the arrow is a → glyph rotated 90deg, so it reads as ↓ */
@@ -317,7 +317,7 @@ a { color: inherit; text-decoration: none; }
 .featured {
   position: absolute;
   left: 0;
-  top: 1180px;
+  top: 875px;
   width: 1584px;
   height: 1600px;
   background: #000;
@@ -420,7 +420,7 @@ a { color: inherit; text-decoration: none; }
 .author-portrait {
   position: absolute;
   left: 870px;
-  top: 2783px;
+  top: 2478px;
   width: 582.258px;
   height: 722px;
   background: #090a0b;
@@ -441,13 +441,13 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* 3174:382 */
-.author-tag { left: 94px; top: 2817px; width: 430px; height: 24px; }
+.author-tag { left: 94px; top: 2512px; width: 430px; height: 24px; }
 
 /* 3019:43 */
 .author-title {
   position: absolute;
   left: 94px;
-  top: 2891px;
+  top: 2586px;
   width: 850px;
   height: 110px;
   font-family: Inter, sans-serif;
@@ -463,7 +463,7 @@ a { color: inherit; text-decoration: none; }
 .author-bio {
   position: absolute;
   left: 94px;
-  top: 3031px;
+  top: 2726px;
   width: 620px;
   height: 344px;
   font-family: Inter, sans-serif;
@@ -474,7 +474,7 @@ a { color: inherit; text-decoration: none; }
 .author-bio p { line-height: 36px; }
 
 /* 3174:378 / 3174:376 */
-.author-btn { left: 94px; top: 3438px; width: 199px; height: 42px; }
+.author-btn { left: 94px; top: 3133px; width: 199px; height: 42px; }
 .author-btn > span { left: 106px; top: 12px; }
 
 /* =============================================================================
@@ -484,7 +484,7 @@ a { color: inherit; text-decoration: none; }
 .footer {
   position: absolute;
   left: 0;
-  top: 3628px;
+  top: 3323px;
   width: 1584px;
   height: 800px;
   background: #000;
@@ -637,7 +637,7 @@ a { color: inherit; text-decoration: none; }
   .author-bio     { translate: 0 2px; }   /* 3177:441 */
 
   /* --- hero ------------------------------------------------------------- */
-  .hero { width: 390px; height: 900px; background: #000; }
+  .hero { top: 0; width: 390px; height: 900px; background: #000; }
 
   /* 3177:409 - inset rather than bleeding off both edges, and portrait. The
      <picture> in the markup swaps in Figma's own render of this node here, so
