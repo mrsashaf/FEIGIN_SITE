@@ -369,15 +369,47 @@ a { color: inherit; text-decoration: none; }
   height: 1030px;
   overflow: hidden;
 }
-/* 3173:362 */
+/* Gallery slides. Each is Figma's own render of one of the four frames
+   (3230:740 / 745 / 751 / 758) and is already exactly this slot's 900x1030,
+   so it simply fills it. */
 .featured__media img {
   position: absolute;
-  left: -529px;
-  top: -73px;
-  width: 2092px;
-  height: 1176px;
-  object-fit: fill;   /* 2092:1176 vs the 3840x2160 source differ by 0.06% */
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 900ms ease;
   pointer-events: none;
+}
+.featured__media img.is-active { opacity: 1; }
+
+.gallery__dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 24px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  z-index: 2;
+}
+.gallery__dots button {
+  width: 11px;
+  height: 11px;
+  padding: 0;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: background 200ms ease;
+}
+.gallery__dots button[aria-current="true"] { background: #fff; }
+
+/* With reduced motion the script never starts, so the first slide must be
+   solid rather than mid-fade. */
+@media (prefers-reduced-motion: reduce) {
+  .featured__media img { transition: none; }
 }
 
 /* 3017:13 */
@@ -714,7 +746,11 @@ a { color: inherit; text-decoration: none; }
   }
   /* 3177:412 / 3177:414 - the frame is inset now, the image inside it is not */
   .featured__media { left: 23px; top: 194px; width: 345px; height: 610px; }
-  .featured__media img { left: -417.858px; top: -43.237px; width: 1238.681px; height: 696.758px; }
+  /* Slides are 900x1030 and this slot is 345x610, so they crop to fit rather
+     than reproducing the old hand-made mobile crop of a single photograph. */
+  .featured__media img { inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .gallery__dots { bottom: 14px; gap: 9px; }
+  .gallery__dots button { width: 9px; height: 9px; border-width: 1.25px; }
   .featured__specs { left: 23px; top: 827px; width: 345px; height: 51px; }
   .featured__h3 {
     left: 25px;

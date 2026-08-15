@@ -142,10 +142,21 @@
     <h2 class="featured__kicker" data-node-id="3017:8">CURRENT INCIDENT</h2>
     <p class="featured__sub" data-node-id="3017:9">The first public story from the ABERRATION anthology.</p>
 
-    <!-- Frame 1618872815 clips the artwork. The 900x1030 "FEATURE IMAGE" fill (3017:10)
-         underneath is fully covered by 3173:362, so only the visible one is loaded. -->
+    <!-- Gallery. The four slides are Figma's own renders of frames 3230:740, 745,
+         751 and 758, each already exactly the 900x1030 of this slot, so they just
+         fill it. It advances itself; the dots and a swipe also work, and hovering
+         or leaving the tab pauses it. -->
     <div class="featured__media" data-node-id="3173:361">
-      <img src="assets/feature-jerry.webp" alt="Jerry, a smiling yellow star, sitting on a dresser in front of a television" width="3840" height="2160" loading="lazy" decoding="async" data-node-id="3173:362">
+      <img class="is-active" src="assets/gallery-1.webp" alt="Jerry, a smiling yellow star, hanging over a kitchen table set with spaghetti" width="1800" height="2060" decoding="async" data-node-id="3230:740">
+      <img src="assets/gallery-2.webp" alt="An open closet in a dark, empty room" width="1800" height="2060" fetchpriority="low" decoding="async" data-node-id="3230:745">
+      <img src="assets/gallery-3.webp" alt="A living room overgrown with dark tendrils, the television still on" width="1800" height="2060" fetchpriority="low" decoding="async" data-node-id="3230:751">
+      <img src="assets/gallery-4.webp" alt="Jerry glowing faintly in a darkened kitchen" width="1800" height="2060" fetchpriority="low" decoding="async" data-node-id="3230:758">
+      <div class="gallery__dots">
+        <button type="button" aria-label="Show image 1" aria-current="true"></button>
+        <button type="button" aria-label="Show image 2" aria-current="false"></button>
+        <button type="button" aria-label="Show image 3" aria-current="false"></button>
+        <button type="button" aria-label="Show image 4" aria-current="false"></button>
+      </div>
     </div>
 
     <!-- "COMFORT ZONE" was the project's old name; the case tag now carries the
@@ -242,6 +253,56 @@
   // Catches the moment the document first gains a real width, which the resize
   // event does not always fire for.
   if (window.ResizeObserver) new ResizeObserver(fit).observe(document.documentElement);
+})();
+
+// The feature gallery. Advances itself; the dots, a swipe and the arrow keys also
+// drive it, and it pauses on hover or when the tab is hidden.
+(function () {
+  var box = document.querySelector('.featured__media');
+  if (!box) return;
+  var slides = [].slice.call(box.querySelectorAll('img'));
+  var dots = [].slice.call(box.querySelectorAll('.gallery__dots button'));
+  if (slides.length < 2) return;
+
+  var HOLD = 4200;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var i = 0, timer = null;
+
+  function show(n) {
+    i = (n + slides.length) % slides.length;
+    slides.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
+    dots.forEach(function (d, k) { d.setAttribute('aria-current', k === i ? 'true' : 'false'); });
+  }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+  function start() { if (reduce) return; stop(); timer = setInterval(function () { show(i + 1); }, HOLD); }
+
+  dots.forEach(function (d, k) {
+    d.addEventListener('click', function () { show(k); start(); });
+  });
+  box.addEventListener('mouseenter', stop);
+  box.addEventListener('mouseleave', start);
+  document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+
+  var x0 = null;
+  box.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; stop(); }, { passive: true });
+  box.addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 40) show(i + (dx < 0 ? 1 : -1));
+    x0 = null; start();
+  }, { passive: true });
+
+  show(0);
+  start();
+
+  // Pausing while the gallery is off screen is an optimisation, not the thing
+  // that drives it - the timer is already running above. If the observer never
+  // fires, the gallery still advances rather than sitting frozen.
+  if (window.IntersectionObserver) {
+    new IntersectionObserver(function (entries) {
+      entries[0].isIntersecting ? start() : stop();
+    }, { threshold: 0.25 }).observe(box);
+  }
 })();
 
 // The hero headline, rewritten by Jerry rather than cycled like a carousel.
