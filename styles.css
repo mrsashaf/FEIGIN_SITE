@@ -375,7 +375,7 @@ a { color: inherit; text-decoration: none; }
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transition: opacity 600ms ease;
+  transition: opacity 350ms ease;
   pointer-events: none;
 }
 .featured__media img.is-active { opacity: 1; }

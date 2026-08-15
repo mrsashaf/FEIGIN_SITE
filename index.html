@@ -264,14 +264,29 @@
   var dots = [].slice.call(box.querySelectorAll('.gallery__dots button'));
   if (slides.length < 2) return;
 
-  var HOLD = 2800;
+  var HOLD = 2800;   // whole cycle, transition included
+  var FADE = 350;    // must match the opacity transition in styles.css
+  var GAP = 60;      // beat of black between the two halves
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var i = 0, timer = null;
+  var i = 0, timer = null, token = 0;
 
-  function show(n) {
-    i = (n + slides.length) % slides.length;
-    slides.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
-    dots.forEach(function (d, k) { d.setAttribute('aria-current', k === i ? 'true' : 'false'); });
+  // Not a cross-fade: the current slide fades out to black first, and only then
+  // does the next one fade in. `token` guards the gap - a dot pressed mid-fade
+  // supersedes the pending fade-in instead of racing it.
+  function show(n, instant) {
+    n = (n + slides.length) % slides.length;
+    var mine = ++token;
+    dots.forEach(function (d, k) { d.setAttribute('aria-current', k === n ? 'true' : 'false'); });
+    i = n;
+    if (instant) {
+      slides.forEach(function (s, k) { s.classList.toggle('is-active', k === n); });
+      return;
+    }
+    slides.forEach(function (s) { s.classList.remove('is-active'); });
+    setTimeout(function () {
+      if (mine !== token) return;
+      slides[i].classList.add('is-active');
+    }, FADE + GAP);
   }
   function stop() { if (timer) { clearInterval(timer); timer = null; } }
   function start() { if (reduce) return; stop(); timer = setInterval(function () { show(i + 1); }, HOLD); }
@@ -292,7 +307,7 @@
     x0 = null; start();
   }, { passive: true });
 
-  show(0);
+  show(0, true);
   start();
 
   // Pausing while the gallery is off screen is an optimisation, not the thing
