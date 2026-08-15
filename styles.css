@@ -119,12 +119,16 @@ a { color: inherit; text-decoration: none; }
    object-fit: fill is deliberate: the 3840x2160 source is stretched into the
    2274x1180 box, verified against the Figma render by cross-correlation
    (ncc 0.514 for fill vs 0.20-0.32 for every cover variant). */
+/* 3231:815 "Slide 16:9 - 58" replaced the single artwork node: it is a group of
+   the photograph plus letterbox bars, so it is taken as Figma's own render.
+   Declared 1584x891 at (89, 285.375); the export arrives 1495x871.5 because
+   Figma clips it to the frame's right edge and trims empty rows. */
 .hero__bg {
   position: absolute;
-  left: -82px;
-  top: 0;
-  width: 2274px;
-  height: 1180px;
+  left: 89px;
+  top: 285.375px;
+  width: 1495px;
+  height: 871.5px;
   object-fit: fill;
   pointer-events: none;
 }
