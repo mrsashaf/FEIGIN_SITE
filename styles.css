@@ -95,9 +95,13 @@ a { color: inherit; text-decoration: none; }
 .btn--solid { background: #fff; }
 .btn--solid > span { color: #000; }
 
+/* An inset shadow, not a border. A border creates a padding box, and every
+   absolutely positioned child then measures from inside it - the label sat 2px
+   lower than the solid button's (16.91 against Figma's 14.91). The shadow paints
+   the same 2px rule without moving anything. */
 .btn--outline {
   background: #000;
-  border: 2px solid #fff;
+  box-shadow: inset 0 0 0 2px #fff;
 }
 .btn--outline > span { color: #fff; }
 
@@ -690,7 +694,7 @@ a { color: inherit; text-decoration: none; }
     top: 655.828px;
     width: 341px;
     height: 57.396px;
-    border-width: 2.717px;
+    box-shadow: inset 0 0 0 2.717px #fff;
   }
   .hero__btn2-label { left: 161.58px; top: 20.26px; font-size: 23.206px; letter-spacing: -1.6244px; }
   .hero__btn2-arrow { left: 268.01px; top: 19.7px; width: 21px; height: 23px; }
