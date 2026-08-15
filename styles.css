@@ -647,7 +647,7 @@ a { color: inherit; text-decoration: none; }
      the crop is already baked in and the image just fills its box. */
   /* The node is 344x714 at y=-14, but Figma exports it already clipped by the
      frame, so the file is 344x700 covering y 0..700. Placed on that region. */
-  .hero__bg { left: 0; top: 0; width: 390px; height: 627.33px; object-fit: fill; }
+  .hero__bg { left: 0; top: 0; width: 390px; height: 736px; object-fit: fill; }
 
   /* 3180:45 - the logo leaves the corner and centres above the artwork */
   .hero__logo { left: 55px; top: 15px; width: 281px; height: 63.047px; }
