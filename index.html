@@ -144,19 +144,13 @@
 
     <!-- Gallery. The four slides are Figma's own renders of frames 3230:740, 745,
          751 and 758, each already exactly the 900x1030 of this slot, so they just
-         fill it. It advances itself; the dots and a swipe also work, and hovering
-         or leaving the tab pauses it. -->
+         fill it. It advances itself and can be swiped; hovering or leaving the tab
+         pauses it. No dots - removed by request. -->
     <div class="featured__media" data-node-id="3173:361">
       <img class="is-active" src="assets/gallery-1.webp" alt="Jerry, a smiling yellow star, hanging over a kitchen table set with spaghetti" width="1800" height="2060" decoding="async" data-node-id="3230:740">
       <img src="assets/gallery-2.webp" alt="An open closet in a dark, empty room" width="1800" height="2060" fetchpriority="low" decoding="async" data-node-id="3230:745">
       <img src="assets/gallery-3.webp" alt="A living room overgrown with dark tendrils, the television still on" width="1800" height="2060" fetchpriority="low" decoding="async" data-node-id="3230:751">
       <img src="assets/gallery-4.webp" alt="Jerry glowing faintly in a darkened kitchen" width="1800" height="2060" fetchpriority="low" decoding="async" data-node-id="3230:758">
-      <div class="gallery__dots">
-        <button type="button" aria-label="Show image 1" aria-current="true"></button>
-        <button type="button" aria-label="Show image 2" aria-current="false"></button>
-        <button type="button" aria-label="Show image 3" aria-current="false"></button>
-        <button type="button" aria-label="Show image 4" aria-current="false"></button>
-      </div>
     </div>
 
     <!-- "COMFORT ZONE" was the project's old name; the case tag now carries the
@@ -255,28 +249,26 @@
   if (window.ResizeObserver) new ResizeObserver(fit).observe(document.documentElement);
 })();
 
-// The feature gallery. Advances itself; the dots, a swipe and the arrow keys also
-// drive it, and it pauses on hover or when the tab is hidden.
+// The feature gallery. Advances itself; a swipe also drives it, and it pauses on
+// hover or when the tab is hidden. No visible controls by request.
 (function () {
   var box = document.querySelector('.featured__media');
   if (!box) return;
   var slides = [].slice.call(box.querySelectorAll('img'));
-  var dots = [].slice.call(box.querySelectorAll('.gallery__dots button'));
   if (slides.length < 2) return;
 
-  var HOLD = 2800;   // whole cycle, transition included
+  var HOLD = 5600;   // whole cycle, transition included
   var FADE = 350;    // must match the opacity transition in styles.css
   var GAP = 60;      // beat of black between the two halves
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var i = 0, timer = null, token = 0;
 
   // Not a cross-fade: the current slide fades out to black first, and only then
-  // does the next one fade in. `token` guards the gap - a dot pressed mid-fade
+  // does the next one fade in. `token` guards the gap - a swipe landing mid-fade
   // supersedes the pending fade-in instead of racing it.
   function show(n, instant) {
     n = (n + slides.length) % slides.length;
     var mine = ++token;
-    dots.forEach(function (d, k) { d.setAttribute('aria-current', k === n ? 'true' : 'false'); });
     i = n;
     if (instant) {
       slides.forEach(function (s, k) { s.classList.toggle('is-active', k === n); });
@@ -291,9 +283,6 @@
   function stop() { if (timer) { clearInterval(timer); timer = null; } }
   function start() { if (reduce) return; stop(); timer = setInterval(function () { show(i + 1); }, HOLD); }
 
-  dots.forEach(function (d, k) {
-    d.addEventListener('click', function () { show(k); start(); });
-  });
   box.addEventListener('mouseenter', stop);
   box.addEventListener('mouseleave', start);
   document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
@@ -310,14 +299,14 @@
   show(0, true);
   start();
 
-  // Pausing while the gallery is off screen is an optimisation, not the thing
-  // that drives it - the timer is already running above. If the observer never
-  // fires, the gallery still advances rather than sitting frozen.
-  if (window.IntersectionObserver) {
-    new IntersectionObserver(function (entries) {
-      entries[0].isIntersecting ? start() : stop();
-    }, { threshold: 0.25 }).observe(box);
-  }
+  // There was an IntersectionObserver here that paused the gallery while it was
+  // off screen. It is gone deliberately. Its first callback reports "not visible"
+  // for anything below the fold and stops the timer, and if no further callback
+  // arrives the gallery stays frozen for good - which is exactly what happened in
+  // testing. The canvas sits inside a clipped, scaled container, the kind of
+  // ancestor that intersection maths gets wrong, so the saving of one 5.6s timer
+  // was not worth risking the whole feature. The tab-visibility pause above is
+  // reliable and stays.
 })();
 
 // The hero headline, rewritten by Jerry rather than cycled like a carousel.
