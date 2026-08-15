@@ -222,7 +222,10 @@ a { color: inherit; text-decoration: none; }
   font-family: Inter, sans-serif;
   font-weight: 700;
   font-size: 81.318px;
-  line-height: 0.7535;
+  /* 0.912, not the 0.7535 the API reports for this node. Figma renders the three
+     lines 74px apart (81.318 x 0.912 = 74.2), and 0.7535 would give 61.3 - the
+     block would come out 46px short. Measured off Figma's own render. */
+  line-height: 0.912;
   letter-spacing: -5.6923px;
   color: #fff;
 }
@@ -602,7 +605,7 @@ a { color: inherit; text-decoration: none; }
    ============================================================================= */
 
 .hero__nav          { translate: 0 2px; }   /* 3016:19 */
-.hero__h1           { translate: 0 8px; }   /* 3016:22 */
+.hero__h1           { translate: 0 2px; }   /* 3016:22 */
 .featured__kicker   { translate: 0 6px; }   /* 3017:8  */
 .featured__sub      { translate: 0 5px; }   /* 3017:9  */
 .featured__body     { translate: 0 2px; }   /* 3017:15 */
@@ -623,8 +626,8 @@ a { color: inherit; text-decoration: none; }
    ============================================================================= */
 
 @media (max-width: 767px) {
-  .viewport { aspect-ratio: 390 / 4559; }
-  .canvas { --scale: calc(100vw / 390px); width: 390px; height: 4559px; }
+  .viewport { aspect-ratio: 390 / 4443; }
+  .canvas { --scale: calc(100vw / 390px); width: 390px; height: 4443px; }
 
   /* The baseline nudges earlier in this file were solved against the desktop
      render at desktop type sizes and do not transfer - mobile leading differs,
@@ -632,49 +635,49 @@ a { color: inherit; text-decoration: none; }
      Figma's render of 3177:394 with a glyph mask. */
   .hero__nav, .featured__kicker, .featured__sub,
   .footer__social, .footer__copy { translate: none; }
-  .hero__h1       { translate: 0 3px; }   /* 3177:395 */
+  .hero__h1       { translate: 0 2px; }   /* 3177:395 */
   .featured__body { translate: 0 2px; }   /* 3177:420 */
   .author-bio     { translate: 0 2px; }   /* 3177:441 */
 
   /* --- hero ------------------------------------------------------------- */
-  .hero { top: 0; width: 390px; height: 900px; background: #000; }
+  .hero { top: 0; width: 390px; height: 780px; background: #000; }
 
   /* 3177:409 - inset rather than bleeding off both edges, and portrait. The
      <picture> in the markup swaps in Figma's own render of this node here, so
      the crop is already baked in and the image just fills its box. */
   /* The node is 344x714 at y=-14, but Figma exports it already clipped by the
      frame, so the file is 344x700 covering y 0..700. Placed on that region. */
-  .hero__bg { left: 24px; top: 0; width: 344px; height: 700px; object-fit: fill; }
+  .hero__bg { left: 0; top: 0; width: 390px; height: 627.33px; object-fit: fill; }
 
   /* 3180:45 - the logo leaves the corner and centres above the artwork */
-  .hero__logo { left: 55px; top: 18px; width: 281px; height: 63.047px; }
+  .hero__logo { left: 55px; top: 15px; width: 281px; height: 63.047px; }
 
   /* Neither exists in the mobile frame */
   .hero__nav, .hero__tagline { display: none; }
 
   /* 3177:403 / 3177:407 / 3177:408 */
-  .hero__title { left: -5px; top: 446px; width: 406px; height: 98.93px; }
-  .hero__title-text { top: 3.836px; width: 406px; font-size: 89.708px; letter-spacing: -0.8971px; }
-  .hero__star { left: 179.34px; top: -19.26px; width: 31.877px; height: 32.016px; }  /* same 40px lift, scaled to this size */
-  .hero__star-rot { width: 23.157px; height: 22.063px; }
+  .hero__title { left: -5px; top: 371px; width: 350px; height: 85.285px; }
+  .hero__title-text { top: 3.307px; width: 350px; font-size: 77.334px; letter-spacing: -0.7733px; }
+  .hero__star { left: 154.61px; top: -16.56px; width: 27.48px; height: 27.6px; }  /* same 40px lift, scaled to this size */
+  .hero__star-rot { width: 19.963px; height: 19.02px; }
 
   /* 3177:395 - the rewriting headline keeps its explicit three lines here too */
   .hero__h1 {
-    left: 27px;
-    top: 555.219px;
-    width: 342.427px;
-    height: 110.64px;
-    font-size: 39.164px;
-    letter-spacing: -2.7415px;
+    left: 22.586px;
+    top: 465.155px;
+    width: 295.196px;
+    height: 95.379px;
+    font-size: 33.762px;
+    letter-spacing: -2.3633px;
   }
 
   /* 3177:396 / 3177:399 */
   .btn > span { font-size: 23.274px; letter-spacing: -1.6292px; }
-  .hero__btn1 { left: 24px; top: 700px; width: 342px; height: 57.564px; }
+  .hero__btn1 { left: 24px; top: 584px; width: 342px; height: 57.564px; }
   .hero__btn1 > span { left: 175.48px; top: 20.32px; }
   .hero__btn2 {
     left: 24px;
-    top: 771.828px;
+    top: 655.828px;
     width: 341px;
     height: 57.396px;
     border-width: 2.717px;
@@ -684,7 +687,7 @@ a { color: inherit; text-decoration: none; }
   .hero__btn2-arrow > span { font-size: 23.206px; letter-spacing: -1.6244px; }
 
   /* --- featured --------------------------------------------------------- */
-  .featured { top: 907px; width: 390px; height: 1545px; }
+  .featured { top: 791px; width: 390px; height: 1545px; }
 
   .featured__tag { left: 23px; top: 0; width: 260px; }
   .featured__kicker {
@@ -727,10 +730,10 @@ a { color: inherit; text-decoration: none; }
   .featured__btn > span { left: 175.48px; top: 20.32px; }
 
   /* --- about the creator ------------------------------------------------- */
-  .author-tag { left: 25px; top: 2612px; width: 430px; }
+  .author-tag { left: 25px; top: 2496px; width: 430px; }
   .author-title {
     left: 25px;
-    top: 2660px;
+    top: 2544px;
     width: 342px;
     height: 82px;
     font-size: 39.16px;
@@ -741,23 +744,23 @@ a { color: inherit; text-decoration: none; }
   /* 3184:64 - a bare rectangle, no placeholder frame, no backing colour */
   .author-portrait {
     left: 23px;
-    top: 2753px;
+    top: 2637px;
     width: 345px;
     height: 498px;
     background: none;
   }
   .author-portrait img { left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; }
 
-  .author-bio { left: 24px; top: 3293px; width: 348px; height: 410px; font-size: 24px; }  /* 348 for the same reason as the body above */
+  .author-bio { left: 24px; top: 3177px; width: 348px; height: 410px; font-size: 24px; }  /* 348 for the same reason as the body above */
   .author-bio p { line-height: 1.24; }
-  .author-btn { left: 24px; top: 3737px; width: 342px; height: 57.564px; }
+  .author-btn { left: 24px; top: 3621px; width: 342px; height: 57.564px; }
   .author-btn > span { left: 175.48px; top: 20.32px; }
 
   /* --- footer ------------------------------------------------------------ */
   /* The mobile frame has no socials, no teaser, no disclaimer, and its logo
      lives at the top of the page - only the copyright line survives here.
      Steam, YouTube and LinkedIn all stay reachable through the three buttons. */
-  .footer { top: 3938px; width: 390px; height: 621px; }
+  .footer { top: 3822px; width: 390px; height: 621px; }
   .footer__logo, .footer__social, .footer__btn,
   .footer__teaser, .footer__disclaimer { display: none; }
 
