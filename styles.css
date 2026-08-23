@@ -742,7 +742,11 @@ a { color: inherit; text-decoration: none; }
      the last word down and break every line after it. Four pixels of slack buys
      back Figma's own line breaks; the box itself is invisible either way. */
   .featured__body { left: 25px; top: 1106px; width: 347px; height: 410px; font-size: 24px; }
-  .featured__btn { left: 23px; top: 1487px; width: 342px; height: 57.564px; }
+  /* 1514, not Figma's 1487. The repositioned description runs one line longer
+     than the copy the frame was drawn around, and at 1487 the last line ran
+     7px INTO the white button. Moved down 27px to clear it; the next element
+     below is the about tag at 2496, so there is room to spare. */
+  .featured__btn { left: 23px; top: 1514px; width: 342px; height: 57.564px; }
   .featured__btn > span { left: 175.48px; top: 20.32px; }
 
   /* --- about the creator ------------------------------------------------- */
