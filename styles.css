@@ -40,7 +40,7 @@ a { color: inherit; text-decoration: none; }
 .viewport {
   position: relative;
   width: 100%;
-  aspect-ratio: 1584 / 4159;
+  aspect-ratio: 1584 / 5119;   /* Figma 4159 + 960 for JERRY'S SHOW */
   overflow: hidden;
 }
 
@@ -50,7 +50,7 @@ a { color: inherit; text-decoration: none; }
   top: 0;
   left: 0;
   width: 1584px;
-  height: 4159px;
+  height: 5119px;   /* Figma 4159 + 960 for JERRY'S SHOW */
   background: #000;
   transform-origin: 0 0;
   transform: scale(var(--scale, 1));
@@ -430,6 +430,110 @@ a { color: inherit; text-decoration: none; }
 .featured__specs { left: 60px; top: 1395px; width: 758px; height: 51px; }
 
 /* =============================================================================
+   JERRY'S SHOW — added 10.11.26, NOT part of the Figma frame
+   Sits where the about block used to start; everything after it is pushed down
+   by --show-shift (margin-top on absolutely placed nodes moves them, and leaves
+   their own Figma `top` values untouched).
+   ============================================================================= */
+
+.canvas { --show-shift: 960px; }
+
+/* `.canvas` prefix on purpose: `.canvas p / h2 { margin: 0 }` would otherwise win
+   over a bare class and leave the about tag and title behind. */
+.canvas .author-portrait, .canvas .author-tag, .canvas .author-title,
+.canvas .author-bio, .canvas .author-btn, .canvas .footer { margin-top: var(--show-shift); }
+
+.show {
+  position: absolute;
+  left: 0;
+  top: 2478px;
+  width: 1584px;
+  height: 960px;
+  background: #000;
+}
+
+/* Same type as CURRENT INCIDENT / its subtitle */
+.show__title {
+  position: absolute;
+  left: 60px;
+  top: 60px;
+  width: 1200px;
+  height: 72px;
+  font-family: Inter, sans-serif;
+  font-weight: 700;
+  font-size: 72.511px;
+  line-height: 0.7535;
+  letter-spacing: -5.0758px;
+  color: #fff;
+}
+.show__sub {
+  position: absolute;
+  left: 60px;
+  top: 146px;
+  width: 1464px;
+  font-family: Inter, sans-serif;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  color: #9c9c9c;
+}
+
+.show__card {
+  position: absolute;
+  top: 236px;
+  width: 702px;
+  height: 395px;
+  padding: 0;
+  border: 0;
+  background: #090a0b;
+  overflow: hidden;
+  cursor: pointer;
+}
+.show__card--1 { left: 60px; }
+.show__card--2 { left: 822px; }
+.show__card img,
+.show__card iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: cover;
+}
+.show__card img { transition: opacity 200ms ease; }
+.show__card:hover img,
+.show__card:focus-visible img { opacity: 0.85; }
+
+/* White square plate with a black play triangle — the site's button language */
+.show__play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 84px;
+  height: 84px;
+  transform: translate(-50%, -50%);
+  background: #fff;
+}
+.show__play::after {
+  content: "";
+  position: absolute;
+  left: 33px;
+  top: 26px;
+  border-style: solid;
+  border-width: 16px 0 16px 26px;
+  border-color: transparent transparent transparent #000;
+}
+.show__card.is-playing { cursor: default; }
+
+.show__tag { top: 655px; width: 702px; height: 24px; }
+.show__tag--1 { left: 60px; }
+.show__tag--2 { left: 822px; }
+
+.show__btn { left: 60px; top: 735px; width: 251px; height: 42.248px; }
+.show__btn > span { left: 125.5px; top: 14.91px; }
+
+/* =============================================================================
    ABOUT THE CREATOR — loose nodes sitting straight on the root frame
    ============================================================================= */
 
@@ -642,8 +746,23 @@ a { color: inherit; text-decoration: none; }
    ============================================================================= */
 
 @media (max-width: 767px) {
-  .viewport { aspect-ratio: 390 / 4443; }
-  .canvas { --scale: calc(100vw / 390px); width: 390px; height: 4443px; }
+  .viewport { aspect-ratio: 390 / 5275; }   /* Figma 4443 + 832 for JERRY'S SHOW */
+  .canvas { --scale: calc(100vw / 390px); width: 390px; height: 5275px; --show-shift: 832px; }
+
+  /* --- JERRY'S SHOW (not in Figma): stacked, starts where the about tag was -- */
+  .show { top: 2496px; width: 390px; height: 832px; }
+  .show__title { left: 23px; top: 0; width: 345px; height: 40px; font-size: 39.16px; line-height: 0.915; letter-spacing: -2.7412px; }
+  .show__sub { left: 23px; top: 52px; width: 345px; font-size: 22px; line-height: 1.15; letter-spacing: -0.6px; }
+  .show__card { width: 345px; height: 194px; }
+  .show__card--1 { left: 23px; top: 140px; }
+  .show__card--2 { left: 23px; top: 390px; }
+  .show__play { width: 60px; height: 60px; }
+  .show__play::after { left: 23px; top: 18px; border-width: 12px 0 12px 19px; }
+  .show__tag { width: 345px; font-size: 13px; }
+  .show__tag--1 { left: 23px; top: 344px; }
+  .show__tag--2 { left: 23px; top: 594px; }
+  .show__btn { left: 23px; top: 640px; width: 342px; height: 57.564px; }
+  .show__btn > span { left: 175.48px; top: 20.32px; }
 
   /* The baseline nudges earlier in this file were solved against the desktop
      render at desktop type sizes and do not transfer - mobile leading differs,

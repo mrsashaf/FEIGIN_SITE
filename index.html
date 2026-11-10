@@ -97,7 +97,7 @@
 </head>
 <body>
 
-<!-- 1584 x 4159 design canvas, scaled proportionally to the viewport. -->
+<!-- 1584 x 5119 design canvas (Figma's 4159 + the JERRY'S SHOW block), scaled proportionally to the viewport. -->
 <div class="viewport">
 <div class="canvas">
 
@@ -173,6 +173,29 @@
     <p class="tag featured__specs" data-node-id="3017:16">[ PC + PC VR · PSYCHOLOGICAL HORROR · COMING TO STEAM ]</p>
   </section>
 
+  <!-- ============ JERRY'S SHOW — added 10.11.26, not in the Figma frame ============
+       Two short cartoons. A click swaps the poster for the YouTube player, so the
+       page loads no third-party video until someone asks for it. Everything below
+       this block is pushed down by --show-shift in styles.css. -->
+  <section class="show" id="show">
+    <h2 class="show__title">JERRY'S SHOW</h2>
+    <p class="show__sub">Jerry hosts his own TV show. Some episodes air inside the game, on Mike's TV.</p>
+
+    <button class="show__card show__card--1" type="button" data-yt="EwIPAGqWQVc" aria-label="Play Jerry's Cooking Show, episode 1">
+      <img src="assets/show-ep1.webp" alt="Jerry's Cooking Show: Jerry, a smiling yellow star in a chef's hat, in a sunny kitchen" width="1280" height="720" decoding="async">
+      <span class="show__play" aria-hidden="true"></span>
+    </button>
+    <p class="tag show__tag show__tag--1">[ EPISODE 01 / JERRY'S COOKING SHOW ]</p>
+
+    <button class="show__card show__card--2" type="button" data-yt="ko_5NjVnWes" aria-label="Play Jerry's Chilling Show, episode 2">
+      <img src="assets/show-ep2.webp" alt="Jerry's Chilling Show: Jerry, a dark star with glowing eyes, holding out a slice of pizza" width="1280" height="720" decoding="async">
+      <span class="show__play" aria-hidden="true"></span>
+    </button>
+    <p class="tag show__tag show__tag--2">[ EPISODE 02 / JERRY'S CHILLING SHOW ]</p>
+
+    <a class="btn btn--solid show__btn" href="https://store.steampowered.com/app/4894570/ABERRATION_YesJerry/?utm_source=feigin_site&amp;utm_medium=jerrys_show" target="_blank" rel="noopener"><span>WISHLIST ON STEAM →</span></a>
+  </section>
+
   <!-- ============ ABOUT THE CREATOR — loose nodes on the root frame ============ -->
   <div class="author-portrait" id="about" data-node-id="3019:40">
     <img src="assets/author-portrait.webp" alt="Portrait of Alexander Feigin" width="1124" height="843" loading="lazy" decoding="async" data-node-id="3022:380">
@@ -226,8 +249,9 @@
 (function () {
   // Two design canvases: Figma frame 3014:2 for desktop, 3177:394 for mobile. The
   // breakpoint here must stay in step with the one in styles.css.
-  var DESKTOP = { w: 1584, h: 4159 };
-  var MOBILE = { w: 390, h: 4443 };
+  // Heights include the JERRY'S SHOW block (+960 desktop, +832 mobile, see --show-shift).
+  var DESKTOP = { w: 1584, h: 5119 };
+  var MOBILE = { w: 390, h: 5275 };
   var narrow = window.matchMedia('(max-width: 767px)');
 
   var canvas = document.querySelector('.canvas');
@@ -252,6 +276,23 @@
   // Catches the moment the document first gains a real width, which the resize
   // event does not always fire for.
   if (window.ResizeObserver) new ResizeObserver(fit).observe(document.documentElement);
+})();
+
+// JERRY'S SHOW: a poster until clicked, then the YouTube player in its place.
+(function () {
+  [].forEach.call(document.querySelectorAll('.show__card[data-yt]'), function (card) {
+    card.addEventListener('click', function () {
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + card.getAttribute('data-yt') + '?autoplay=1&rel=0';
+      f.title = card.getAttribute('aria-label');
+      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      f.allowFullscreen = true;
+      var box = document.createElement('div');
+      box.className = card.className + ' is-playing';
+      box.appendChild(f);
+      card.replaceWith(box);
+    });
+  });
 })();
 
 // The feature gallery. Advances itself; a swipe also drives it, and it pauses on
