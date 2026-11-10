@@ -97,7 +97,7 @@
 </head>
 <body>
 
-<!-- 1584 x 5119 design canvas (Figma's 4159 + the JERRY'S SHOW block), scaled proportionally to the viewport. -->
+<!-- 1584 x 4970 design canvas (Figma's 4159 + the JERRY'S SHOW block), scaled proportionally to the viewport. -->
 <div class="viewport">
 <div class="canvas">
 
@@ -116,7 +116,7 @@
       <img src="assets/feigin-logo.svg" alt="FEIGIN ENTERTAINMENT">
     </a>
 
-    <nav class="hero__nav" data-node-id="3016:19"><a href="#game">GAME</a>  \ <a href="#about">ABOUT</a> \ <a href="mailto:feiginentertainment@gmail.com">CONTACT</a></nav>
+    <nav class="hero__nav" data-node-id="3016:19"><a href="#game">GAME</a>  \ <a href="#about">ABOUT</a> \ <a href="#contact">CONTACT</a></nav>
 
     <div class="hero__title" data-node-id="3022:372">
       <p class="hero__title-text" data-node-id="3022:377">Yes, Jerry!</p>
@@ -157,9 +157,7 @@
       <img src="assets/gallery-4.webp" alt="Jerry glowing faintly in a darkened kitchen" width="1800" height="2060" fetchpriority="low" decoding="async" data-node-id="3230:758">
     </div>
 
-    <!-- "COMFORT ZONE" was the project's old name; the case tag now carries the
-         shipping one. Figma still shows the old string on node 3017:13. -->
-    <p class="tag featured__tag" data-node-id="3017:13">[ CASE 02 / YES, JERRY ]</p>
+    <!-- The [ CASE 02 / YES, JERRY ] tag (Figma 3017:13) was removed on request 10.11.26. -->
     <h3 class="featured__h3" data-node-id="3017:14">JERRY MAKES LIFE EASIER</h3>
 
     <div class="featured__body" data-node-id="3017:15">
@@ -184,12 +182,12 @@
     <a class="show__card show__card--1" href="https://youtu.be/EwIPAGqWQVc" target="_blank" rel="noopener" aria-label="Watch Jerry's Cooking Show, episode 1, on YouTube">
       <video src="assets/show-ep1.mp4" poster="assets/show-ep1.webp" muted playsinline preload="auto" aria-hidden="true"></video>
     </a>
-    <p class="tag show__tag show__tag--1">[ EPISODE 01 / JERRY'S COOKING SHOW ]</p>
+    <p class="tag show__tag show__tag--1">[ EP 01 / JERRY'S COOKING SHOW ]</p>
 
     <a class="show__card show__card--2" href="https://youtu.be/ko_5NjVnWes" target="_blank" rel="noopener" aria-label="Watch Jerry's Chilling Show, episode 2, on YouTube">
       <video src="assets/show-ep2.mp4" poster="assets/show-ep2.webp" muted playsinline preload="metadata" aria-hidden="true"></video>
     </a>
-    <p class="tag show__tag show__tag--2">[ EPISODE 02 / JERRY'S CHILLING SHOW ]</p>
+    <p class="tag show__tag show__tag--2">[ EP 02 / JERRY'S CHILLING SHOW ]</p>
 
     <a class="btn btn--solid show__btn" href="https://store.steampowered.com/app/4894570/ABERRATION_YesJerry/?utm_source=feigin_site&amp;utm_medium=jerrys_show" target="_blank" rel="noopener"><span>WISHLIST ON STEAM →</span></a>
   </section>
@@ -209,7 +207,7 @@
     <p>ABERRATION is his ongoing anthology of short interactive horror stories exploring psychological and social anxieties through speculative fiction.</p>
   </div>
 
-  <a class="btn btn--solid author-btn" href="mailto:feiginentertainment@gmail.com" data-node-id="3174:378"><span data-node-id="3174:379">CONTACT →</span></a>
+  <a class="btn btn--solid author-btn" href="#contact" data-node-id="3174:378"><span data-node-id="3174:379">CONTACT →</span></a>
 
   <!-- ============ 08 — FOOTER  (3015:9) ============ -->
   <footer class="footer" id="contact" data-node-id="3015:9">
@@ -219,7 +217,7 @@
 
     <!-- Only active public channels are listed. -->
     <p class="footer__social" data-node-id="3019:67">
-      <a href="https://www.patreon.com/FEIGINEntertainment" target="_blank" rel="noopener">PATREON</a> / <a href="https://www.youtube.com/@FeiginGames" target="_blank" rel="noopener">YOUTUBE</a> / <a href="https://www.tiktok.com/@feigin.games" target="_blank" rel="noopener">TIKTOK</a> / <a href="https://www.instagram.com/sasha_feigin/" target="_blank" rel="noopener">INSTAGRAM</a> / <a href="https://www.linkedin.com/in/alexander-feigin/" target="_blank" rel="noopener">LINKEDIN</a> / <a href="https://store.steampowered.com/app/4894570/ABERRATION_YesJerry/" target="_blank" rel="noopener">STEAM</a>
+      <a href="https://www.patreon.com/FEIGINEntertainment" target="_blank" rel="noopener">PATREON</a> / <a href="https://www.youtube.com/@FeiginGames" target="_blank" rel="noopener">YOUTUBE</a> / <a href="https://www.tiktok.com/@feigin.games" target="_blank" rel="noopener">TIKTOK</a> / <a href="https://www.instagram.com/sasha_feigin/" target="_blank" rel="noopener">INSTAGRAM</a> / <a href="https://www.linkedin.com/in/alexander-feigin/" target="_blank" rel="noopener">LINKEDIN</a> / <a href="https://store.steampowered.com/app/4894570/ABERRATION_YesJerry/" target="_blank" rel="noopener">STEAM</a> / <a href="mailto:feiginentertainment@gmail.com">EMAIL</a>
     </p>
 
     <!-- In Figma the plate (3019:68) and the label (3019:69) are two loose nodes and the
@@ -247,9 +245,9 @@
 (function () {
   // Two design canvases: Figma frame 3014:2 for desktop, 3177:394 for mobile. The
   // breakpoint here must stay in step with the one in styles.css.
-  // Heights include the JERRY'S SHOW block (+960 desktop, +832 mobile, see --show-shift).
-  var DESKTOP = { w: 1584, h: 5119 };
-  var MOBILE = { w: 390, h: 5275 };
+  // Heights include the JERRY'S SHOW block (+874 desktop, +897 mobile, see --show-shift).
+  var DESKTOP = { w: 1584, h: 4970 };
+  var MOBILE = { w: 390, h: 4920 };
   var narrow = window.matchMedia('(max-width: 767px)');
 
   var canvas = document.querySelector('.canvas');
@@ -295,11 +293,15 @@
   }
   vids.forEach(function (v, k) {
     v.muted = true;
-    v.addEventListener('ended', function () {
+    // Only the first 10 seconds of each episode, then hand over to the other one.
+    function next() {
+      if (!v.hasAttribute('data-on')) return;
       rest(v);
       cur = (k + 1) % vids.length;
       play();
-    });
+    }
+    v.addEventListener('timeupdate', function () { if (v.currentTime >= 10) next(); });
+    v.addEventListener('ended', next);
   });
 
   if (!window.IntersectionObserver) { visible = true; play(); return; }

@@ -20,7 +20,8 @@
 *::before,
 *::after { box-sizing: border-box; }
 
-html { background: #000; }
+html { background: #000; scroll-behavior: smooth; }   /* CONTACT glides down to the footer */
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 body {
   margin: 0;
@@ -40,7 +41,7 @@ a { color: inherit; text-decoration: none; }
 .viewport {
   position: relative;
   width: 100%;
-  aspect-ratio: 1584 / 5119;   /* Figma 4159 + 960 for JERRY'S SHOW */
+  aspect-ratio: 1584 / 4970;   /* 10.11.26: one 160px gap between sections */
   overflow: hidden;
 }
 
@@ -50,7 +51,7 @@ a { color: inherit; text-decoration: none; }
   top: 0;
   left: 0;
   width: 1584px;
-  height: 5119px;   /* Figma 4159 + 960 for JERRY'S SHOW */
+  height: 4970px;   /* was 5119 */
   background: #000;
   transform-origin: 0 0;
   transform: scale(var(--scale, 1));
@@ -436,7 +437,7 @@ a { color: inherit; text-decoration: none; }
    their own Figma `top` values untouched).
    ============================================================================= */
 
-.canvas { --show-shift: 960px; }
+.canvas { --show-shift: 874px; }   /* was 960: 160px gaps above and below the block */
 
 /* `.canvas` prefix on purpose: `.canvas p / h2 { margin: 0 }` would otherwise win
    over a bare class and leave the about tag and title behind. */
@@ -446,9 +447,9 @@ a { color: inherit; text-decoration: none; }
 .show {
   position: absolute;
   left: 0;
-  top: 2478px;
+  top: 2368px;   /* was 2478: 160px under the specs line */
   width: 1584px;
-  height: 960px;
+  height: 874px;
   background: #000;
 }
 
@@ -587,7 +588,7 @@ a { color: inherit; text-decoration: none; }
 .footer {
   position: absolute;
   left: 0;
-  top: 3323px;
+  top: 3260px;   /* was 3323: logo 160px under the portrait */
   width: 1584px;
   height: 800px;
   background: #000;
@@ -728,21 +729,25 @@ a { color: inherit; text-decoration: none; }
    ============================================================================= */
 
 @media (max-width: 767px) {
-  .viewport { aspect-ratio: 390 / 5275; }   /* Figma 4443 + 832 for JERRY'S SHOW */
-  .canvas { --scale: calc(100vw / 390px); width: 390px; height: 5275px; --show-shift: 832px; }
+  /* 10.11.26: one 120px gap between every section on mobile (hero art -> CURRENT
+     INCIDENT, specs -> JERRY MAKES LIFE EASIER, button -> JERRY'S SHOW, button ->
+     ABOUT, button -> footer socials). Canvas = footer top 3775 + shift 897 + footer 248. */
+  .viewport { aspect-ratio: 390 / 4920; }
+  .canvas { --scale: calc(100vw / 390px); width: 390px; height: 4920px; --show-shift: 897px; }
 
   /* --- JERRY'S SHOW (not in Figma): stacked, starts where the about tag was -- */
-  .show { top: 2496px; width: 390px; height: 832px; }
+  .show { top: 2520px; width: 390px; height: 873px; }
   /* Same rhythm as mobile CURRENT INCIDENT: kicker 47 / sub 103 / media 194 */
   .show__title { left: 23px; top: 0; width: 345px; height: 40px; font-size: 39.16px; line-height: 0.912; letter-spacing: -2.7412px; }
   .show__sub { left: 23px; top: 56px; width: 345px; height: 52px; font-size: 28px; line-height: 0.912; letter-spacing: -1.96px; }
   .show__card { width: 345px; height: 194px; }
   .show__card--1 { left: 23px; top: 147px; }
-  .show__card--2 { left: 23px; top: 401px; }
-  .show__tag { width: 345px; font-size: 13px; }
-  .show__tag--1 { left: 23px; top: 357px; }
-  .show__tag--2 { left: 23px; top: 611px; }
-  .show__btn { left: 23px; top: 660px; width: 342px; height: 57.564px; }
+  .show__card--2 { left: 23px; top: 425px; }
+  .show__tag { width: 345px; }   /* same .tag type as [ ABOUT THE CREATOR ] - no own size */
+  /* card -> tag 23px, as featured media -> specs (804 -> 827) */
+  .show__tag--1 { left: 23px; top: 364px; }
+  .show__tag--2 { left: 23px; top: 642px; }
+  .show__btn { left: 23px; top: 695px; width: 342px; height: 57.564px; }
   .show__btn > span { left: 175.48px; top: 20.32px; }
 
   /* The baseline nudges earlier in this file were solved against the desktop
@@ -803,9 +808,8 @@ a { color: inherit; text-decoration: none; }
   .hero__btn2-arrow > span { font-size: 23.206px; letter-spacing: -1.6244px; }
 
   /* --- featured --------------------------------------------------------- */
-  .featured { top: 791px; width: 390px; height: 1545px; }
+  .featured { top: 815px; width: 390px; height: 1545px; }   /* was 791: 120px under the hero art */
 
-  .featured__tag { left: 23px; top: 0; width: 260px; }
   .featured__kicker {
     left: 23px;
     top: 47px;
@@ -832,7 +836,7 @@ a { color: inherit; text-decoration: none; }
   .featured__specs { left: 23px; top: 827px; width: 345px; height: 51px; }
   .featured__h3 {
     left: 25px;
-    top: 1001px;
+    top: 995px;   /* was 1001: 120px under the specs line */
     width: 293px;
     height: 145px;
     font-size: 39.16px;
@@ -843,12 +847,12 @@ a { color: inherit; text-decoration: none; }
      343px against 341px on another - which over a full line is enough to push
      the last word down and break every line after it. Four pixels of slack buys
      back Figma's own line breaks; the box itself is invisible either way. */
-  .featured__body { left: 25px; top: 1106px; width: 347px; height: 410px; font-size: 24px; }
+  .featured__body { left: 25px; top: 1100px; width: 347px; height: 410px; font-size: 24px; }
   /* 1514, not Figma's 1487. The repositioned description runs one line longer
      than the copy the frame was drawn around, and at 1487 the last line ran
      7px INTO the white button. Moved down 27px to clear it; the next element
      below is the about tag at 2496, so there is room to spare. */
-  .featured__btn { left: 23px; top: 1527px;  /* 1514 -> 1527: text->button gap 32 on mobile everywhere (10.11.26) */ width: 342px; height: 57.564px; }
+  .featured__btn { left: 23px; top: 1521px;  /* 1514 -> 1527: text->button gap 32 on mobile everywhere (10.11.26) */ width: 342px; height: 57.564px; }
   .featured__btn > span { left: 175.48px; top: 20.32px; }
 
   /* --- about the creator ------------------------------------------------- */
@@ -882,15 +886,30 @@ a { color: inherit; text-decoration: none; }
   /* The mobile frame has no socials, no teaser, no disclaimer, and its logo
      lives at the top of the page - only the copyright line survives here.
      Steam, YouTube and LinkedIn all stay reachable through the three buttons. */
-  .footer { top: 3822px; width: 390px; height: 621px; }
-  .footer__logo, .footer__social, .footer__btn,
+  .footer { top: 3775px; width: 390px; height: 248px; }  /* ~100px of black under the copyright, as on desktop */   /* was 3822: socials 120px under CONTACT */
+  .footer__logo, .footer__btn,
   .footer__teaser, .footer__disclaimer { display: none; }
+
+  /* Socials shown on mobile since 10.11.26: desktop type scaled by the same
+     0.744 as the copyright line (20.466 -> 15.224), wrapped and centred. */
+  .footer__social {
+    left: 24px;
+    top: 0;
+    width: 344px;
+    height: auto;
+    transform: none;
+    white-space: normal;
+    text-align: center;
+    font-size: 21.88px;
+    line-height: 1.3;
+    letter-spacing: -1.5317px;
+  }
 
   /* 3177:463 - centred inside its 344px box, not left-aligned: measured, the
      glyphs start 30px into the box on both sides. */
   .footer__copy {
     left: 24px;
-    top: 0;
+    top: 117px;   /* 30px under the three lines of socials */
     width: 344px;
     transform: none;
     font-size: 15.224px;
