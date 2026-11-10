@@ -541,7 +541,7 @@ a { color: inherit; text-decoration: none; }
   position: absolute;
   left: 792.5px;
   top: 415px;
-  width: 199px;
+  width: 280px;   /* was 199 for "CONTACT →"; "WISHLIST ON STEAM →" since 10.11.26 */
   height: 42px;
   transform: translateX(-50%);
   background: #fff;
@@ -550,9 +550,10 @@ a { color: inherit; text-decoration: none; }
   position: absolute;
   left: 796px;
   top: 430px;
-  width: 110px;
+  width: 240px;
   height: 18px;
   transform: translateX(-50%);
+  white-space: nowrap;
   font-family: Inter, sans-serif;
   font-weight: 800;
   font-size: 17.081px;
