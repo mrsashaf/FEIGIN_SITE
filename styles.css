@@ -271,7 +271,7 @@ a { color: inherit; text-decoration: none; }
 .hero__h1-text { white-space: pre-line; }
 
 /* 3016:24 */
-.hero__btn1 { left: 93px; top: 983px; width: 251px; height: 42.248px; }
+.hero__btn1 { left: 93px; top: 983px;  /* kept: the headline above is rewritten by script, its height changes, so no fixed 48 gap here */ width: 251px; height: 42.248px; }
 .hero__btn1 > span { left: 128.75px; top: 14.91px; }
 
 /* 3016:27 */
@@ -423,7 +423,7 @@ a { color: inherit; text-decoration: none; }
 .featured__body p { line-height: 1.24; }
 
 /* 3017:17 / 3017:18 */
-.featured__btn { left: 1053px; top: 1109px; width: 251px; height: 42.248px; }
+.featured__btn { left: 1053px; top: 1144px;  /* was 1109 */ width: 251px; height: 42.248px; }
 .featured__btn > span { left: 128.75px; top: 14.91px; }
 
 /* 3017:16 */
@@ -452,11 +452,12 @@ a { color: inherit; text-decoration: none; }
   background: #000;
 }
 
-/* Same type as CURRENT INCIDENT / its subtitle */
+/* Same type AND the same rhythm as CURRENT INCIDENT: title -> subtitle 86px,
+   subtitle -> media 110px (featured__kicker 147 / __sub 233 / __media 343). */
 .show__title {
   position: absolute;
   left: 60px;
-  top: 60px;
+  top: 100px;
   width: 1200px;
   height: 72px;
   font-family: Inter, sans-serif;
@@ -469,19 +470,20 @@ a { color: inherit; text-decoration: none; }
 .show__sub {
   position: absolute;
   left: 60px;
-  top: 146px;
+  top: 186px;
   width: 1464px;
+  height: 55px;
   font-family: Inter, sans-serif;
   font-weight: 600;
-  font-size: 36px;
-  line-height: 1.05;
-  letter-spacing: -1.5px;
+  font-size: 52.431px;
+  line-height: 0.7535;
+  letter-spacing: -3.6702px;
   color: #9c9c9c;
 }
 
 .show__card {
   position: absolute;
-  top: 236px;
+  top: 296px;
   width: 702px;
   height: 395px;
   padding: 0;
@@ -492,45 +494,25 @@ a { color: inherit; text-decoration: none; }
 }
 .show__card--1 { left: 60px; }
 .show__card--2 { left: 822px; }
-.show__card img,
-.show__card iframe {
+/* No play icon by request: the cartoons run silently on their own (see the
+   script in index.html) and a tap opens the episode on YouTube. */
+.show__card video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  border: 0;
   object-fit: cover;
+  pointer-events: none;
+  transition: opacity 200ms ease;
 }
-.show__card img { transition: opacity 200ms ease; }
-.show__card:hover img,
-.show__card:focus-visible img { opacity: 0.85; }
+.show__card:hover video,
+.show__card:focus-visible video { opacity: 0.85; }
 
-/* White square plate with a black play triangle — the site's button language */
-.show__play {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 84px;
-  height: 84px;
-  transform: translate(-50%, -50%);
-  background: #fff;
-}
-.show__play::after {
-  content: "";
-  position: absolute;
-  left: 33px;
-  top: 26px;
-  border-style: solid;
-  border-width: 16px 0 16px 26px;
-  border-color: transparent transparent transparent #000;
-}
-.show__card.is-playing { cursor: default; }
-
-.show__tag { top: 655px; width: 702px; height: 24px; }
+.show__tag { top: 713px; width: 702px; height: 24px; }
 .show__tag--1 { left: 60px; }
 .show__tag--2 { left: 822px; }
 
-.show__btn { left: 60px; top: 735px; width: 251px; height: 42.248px; }
+.show__btn { left: 60px; top: 782px; width: 251px; height: 42.248px; }
 .show__btn > span { left: 125.5px; top: 14.91px; }
 
 /* =============================================================================
@@ -595,7 +577,7 @@ a { color: inherit; text-decoration: none; }
 .author-bio p { line-height: 36px; }
 
 /* 3174:378 / 3174:376 */
-.author-btn { left: 94px; top: 3133px; width: 199px; height: 42px; }
+.author-btn { left: 94px; top: 3100px;  /* was 3133 */ width: 199px; height: 42px; }
 .author-btn > span { left: 106px; top: 12px; }
 
 /* =============================================================================
@@ -644,7 +626,7 @@ a { color: inherit; text-decoration: none; }
 .footer__btn-plate {
   position: absolute;
   left: 792.5px;
-  top: 415px;
+  top: 389px;   /* was 415 */
   width: 280px;   /* was 199 for "CONTACT →"; "WISHLIST ON STEAM →" since 10.11.26 */
   height: 42px;
   transform: translateX(-50%);
@@ -653,7 +635,7 @@ a { color: inherit; text-decoration: none; }
 .footer__btn-label {
   position: absolute;
   left: 796px;
-  top: 430px;
+  top: 404px;   /* was 430 */
   width: 240px;
   height: 18px;
   transform: translateX(-50%);
@@ -751,17 +733,16 @@ a { color: inherit; text-decoration: none; }
 
   /* --- JERRY'S SHOW (not in Figma): stacked, starts where the about tag was -- */
   .show { top: 2496px; width: 390px; height: 832px; }
-  .show__title { left: 23px; top: 0; width: 345px; height: 40px; font-size: 39.16px; line-height: 0.915; letter-spacing: -2.7412px; }
-  .show__sub { left: 23px; top: 52px; width: 345px; font-size: 22px; line-height: 1.15; letter-spacing: -0.6px; }
+  /* Same rhythm as mobile CURRENT INCIDENT: kicker 47 / sub 103 / media 194 */
+  .show__title { left: 23px; top: 0; width: 345px; height: 40px; font-size: 39.16px; line-height: 0.912; letter-spacing: -2.7412px; }
+  .show__sub { left: 23px; top: 56px; width: 345px; height: 52px; font-size: 28px; line-height: 0.912; letter-spacing: -1.96px; }
   .show__card { width: 345px; height: 194px; }
-  .show__card--1 { left: 23px; top: 140px; }
-  .show__card--2 { left: 23px; top: 390px; }
-  .show__play { width: 60px; height: 60px; }
-  .show__play::after { left: 23px; top: 18px; border-width: 12px 0 12px 19px; }
+  .show__card--1 { left: 23px; top: 147px; }
+  .show__card--2 { left: 23px; top: 401px; }
   .show__tag { width: 345px; font-size: 13px; }
-  .show__tag--1 { left: 23px; top: 344px; }
-  .show__tag--2 { left: 23px; top: 594px; }
-  .show__btn { left: 23px; top: 640px; width: 342px; height: 57.564px; }
+  .show__tag--1 { left: 23px; top: 357px; }
+  .show__tag--2 { left: 23px; top: 611px; }
+  .show__btn { left: 23px; top: 660px; width: 342px; height: 57.564px; }
   .show__btn > span { left: 175.48px; top: 20.32px; }
 
   /* The baseline nudges earlier in this file were solved against the desktop
@@ -867,7 +848,7 @@ a { color: inherit; text-decoration: none; }
      than the copy the frame was drawn around, and at 1487 the last line ran
      7px INTO the white button. Moved down 27px to clear it; the next element
      below is the about tag at 2496, so there is room to spare. */
-  .featured__btn { left: 23px; top: 1514px; width: 342px; height: 57.564px; }
+  .featured__btn { left: 23px; top: 1527px;  /* 1514 -> 1527: text->button gap 32 on mobile everywhere (10.11.26) */ width: 342px; height: 57.564px; }
   .featured__btn > span { left: 175.48px; top: 20.32px; }
 
   /* --- about the creator ------------------------------------------------- */
@@ -894,7 +875,7 @@ a { color: inherit; text-decoration: none; }
 
   .author-bio { left: 24px; top: 3177px; width: 348px; height: 410px; font-size: 24px; }  /* 348 for the same reason as the body above */
   .author-bio p { line-height: 1.24; }
-  .author-btn { left: 24px; top: 3621px; width: 342px; height: 57.564px; }
+  .author-btn { left: 24px; top: 3598px;  /* was 3621 */ width: 342px; height: 57.564px; }
   .author-btn > span { left: 175.48px; top: 20.32px; }
 
   /* --- footer ------------------------------------------------------------ */

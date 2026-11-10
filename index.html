@@ -174,23 +174,21 @@
   </section>
 
   <!-- ============ JERRY'S SHOW — added 10.11.26, not in the Figma frame ============
-       Two short cartoons. A click swaps the poster for the YouTube player, so the
-       page loads no third-party video until someone asks for it. Everything below
-       this block is pushed down by --show-shift in styles.css. -->
+       Two short cartoons, silent, playing in turn: episode 1, then episode 2, then
+       round again (script at the bottom). A tap opens the episode on YouTube with
+       sound. Everything below this block is pushed down by --show-shift in styles.css. -->
   <section class="show" id="show">
     <h2 class="show__title">JERRY'S SHOW</h2>
-    <p class="show__sub">Jerry hosts his own TV show. Some episodes air inside the game, on Mike's TV.</p>
+    <p class="show__sub">Jerry's own TV show. Some episodes air on Mike's TV.</p>
 
-    <button class="show__card show__card--1" type="button" data-yt="EwIPAGqWQVc" aria-label="Play Jerry's Cooking Show, episode 1">
-      <img src="assets/show-ep1.webp" alt="Jerry's Cooking Show: Jerry, a smiling yellow star in a chef's hat, in a sunny kitchen" width="1280" height="720" decoding="async">
-      <span class="show__play" aria-hidden="true"></span>
-    </button>
+    <a class="show__card show__card--1" href="https://youtu.be/EwIPAGqWQVc" target="_blank" rel="noopener" aria-label="Watch Jerry's Cooking Show, episode 1, on YouTube">
+      <video src="assets/show-ep1.mp4" poster="assets/show-ep1.webp" muted playsinline preload="auto" aria-hidden="true"></video>
+    </a>
     <p class="tag show__tag show__tag--1">[ EPISODE 01 / JERRY'S COOKING SHOW ]</p>
 
-    <button class="show__card show__card--2" type="button" data-yt="ko_5NjVnWes" aria-label="Play Jerry's Chilling Show, episode 2">
-      <img src="assets/show-ep2.webp" alt="Jerry's Chilling Show: Jerry, a dark star with glowing eyes, holding out a slice of pizza" width="1280" height="720" decoding="async">
-      <span class="show__play" aria-hidden="true"></span>
-    </button>
+    <a class="show__card show__card--2" href="https://youtu.be/ko_5NjVnWes" target="_blank" rel="noopener" aria-label="Watch Jerry's Chilling Show, episode 2, on YouTube">
+      <video src="assets/show-ep2.mp4" poster="assets/show-ep2.webp" muted playsinline preload="metadata" aria-hidden="true"></video>
+    </a>
     <p class="tag show__tag show__tag--2">[ EPISODE 02 / JERRY'S CHILLING SHOW ]</p>
 
     <a class="btn btn--solid show__btn" href="https://store.steampowered.com/app/4894570/ABERRATION_YesJerry/?utm_source=feigin_site&amp;utm_medium=jerrys_show" target="_blank" rel="noopener"><span>WISHLIST ON STEAM →</span></a>
@@ -278,21 +276,37 @@
   if (window.ResizeObserver) new ResizeObserver(fit).observe(document.documentElement);
 })();
 
-// JERRY'S SHOW: a poster until clicked, then the YouTube player in its place.
+// JERRY'S SHOW: the episodes play silently in turn - 1, then 2, then 1 again.
+// The idle one rests on its poster. Only runs while the block is on screen, and
+// not at all for people who asked for reduced motion (they just see the posters).
 (function () {
-  [].forEach.call(document.querySelectorAll('.show__card[data-yt]'), function (card) {
-    card.addEventListener('click', function () {
-      var f = document.createElement('iframe');
-      f.src = 'https://www.youtube-nocookie.com/embed/' + card.getAttribute('data-yt') + '?autoplay=1&rel=0';
-      f.title = card.getAttribute('aria-label');
-      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
-      f.allowFullscreen = true;
-      var box = document.createElement('div');
-      box.className = card.className + ' is-playing';
-      box.appendChild(f);
-      card.replaceWith(box);
+  var vids = [].slice.call(document.querySelectorAll('.show__card video'));
+  if (vids.length < 2) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var cur = 0, visible = false;
+
+  function rest(v) { v.pause(); v.removeAttribute('data-on'); v.load(); }   // load() = back to the poster
+  function play() {
+    if (!visible) return;
+    var v = vids[cur];
+    v.setAttribute('data-on', '');
+    var p = v.play();
+    if (p && p.catch) p.catch(function () {});   // autoplay refused: the poster stays, nothing breaks
+  }
+  vids.forEach(function (v, k) {
+    v.muted = true;
+    v.addEventListener('ended', function () {
+      rest(v);
+      cur = (k + 1) % vids.length;
+      play();
     });
   });
+
+  if (!window.IntersectionObserver) { visible = true; play(); return; }
+  new IntersectionObserver(function (es) {
+    visible = es[0].isIntersecting;
+    if (visible) play(); else vids[cur].pause();
+  }, { threshold: 0.25 }).observe(document.querySelector('.show'));
 })();
 
 // The feature gallery. Advances itself; a swipe also drives it, and it pauses on
